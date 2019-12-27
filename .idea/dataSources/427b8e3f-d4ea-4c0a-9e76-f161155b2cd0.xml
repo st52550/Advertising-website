@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="@localhost">
+  <database-model serializer="dbm" dbms="CASSANDRA" family-id="CASSANDRA" format-version="4.14">
+    <root id="1">
+      <ServerVersion>3.11.4</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="demo">
+      <Replication>{&apos;class&apos;: &apos;org.apache.cassandra.locator.SimpleStrategy&apos;, &apos;replication_factor&apos;: &apos;1&apos;}</Replication>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="system">
+      <Replication>{&apos;class&apos;: &apos;org.apache.cassandra.locator.LocalStrategy&apos;}</Replication>
+    </schema>
+    <schema id="4" parent="1" name="system_auth">
+      <Replication>{&apos;class&apos;: &apos;org.apache.cassandra.locator.SimpleStrategy&apos;, &apos;replication_factor&apos;: &apos;1&apos;}</Replication>
+    </schema>
+    <schema id="5" parent="1" name="system_distributed">
+      <Replication>{&apos;class&apos;: &apos;org.apache.cassandra.locator.SimpleStrategy&apos;, &apos;replication_factor&apos;: &apos;3&apos;}</Replication>
+    </schema>
+    <schema id="6" parent="1" name="system_schema">
+      <Replication>{&apos;class&apos;: &apos;org.apache.cassandra.locator.LocalStrategy&apos;}</Replication>
+    </schema>
+    <schema id="7" parent="1" name="system_traces">
+      <Replication>{&apos;class&apos;: &apos;org.apache.cassandra.locator.SimpleStrategy&apos;, &apos;replication_factor&apos;: &apos;2&apos;}</Replication>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="8" parent="1" name="test">
+      <Replication>{&apos;class&apos;: &apos;org.apache.cassandra.locator.SimpleStrategy&apos;, &apos;replication_factor&apos;: &apos;3&apos;}</Replication>
+      <Visible>1</Visible>
+    </schema>
+    <role id="9" parent="1" name="cassandra">
+      <SuperRole>1</SuperRole>
+      <CanLogin>1</CanLogin>
+    </role>
+    <table id="10" parent="2" name="user">
+      <Caching>{&apos;keys&apos;: &apos;ALL&apos;, &apos;rows_per_partition&apos;: &apos;NONE&apos;}</Caching>
+      <Compaction>{&apos;max_threshold&apos;: &apos;32&apos;, &apos;min_threshold&apos;: &apos;4&apos;, &apos;class&apos;: &apos;org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy&apos;}</Compaction>
+      <Compression>{&apos;class&apos;: &apos;org.apache.cassandra.io.compress.LZ4Compressor&apos;, &apos;chunk_length_in_kb&apos;: &apos;64&apos;}</Compression>
+      <DclocalReadRepairChance>0.1</DclocalReadRepairChance>
+    </table>
+    <table id="11" parent="7" name="events">
+      <Comment>tracing events</Comment>
+      <Caching>{&apos;keys&apos;: &apos;ALL&apos;, &apos;rows_per_partition&apos;: &apos;NONE&apos;}</Caching>
+      <Compaction>{&apos;max_threshold&apos;: &apos;32&apos;, &apos;min_threshold&apos;: &apos;4&apos;, &apos;class&apos;: &apos;org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy&apos;}</Compaction>
+      <Compression>{&apos;class&apos;: &apos;org.apache.cassandra.io.compress.LZ4Compressor&apos;, &apos;chunk_length_in_kb&apos;: &apos;64&apos;}</Compression>
+      <DclocalReadRepairChance>0.0</DclocalReadRepairChance>
+      <GcGraceSeconds>0</GcGraceSeconds>
+      <MemtableFlushPeriodInMs>3600000</MemtableFlushPeriodInMs>
+    </table>
+    <table id="12" parent="7" name="sessions">
+      <Comment>tracing sessions</Comment>
+      <Caching>{&apos;keys&apos;: &apos;ALL&apos;, &apos;rows_per_partition&apos;: &apos;NONE&apos;}</Caching>
+      <Compaction>{&apos;max_threshold&apos;: &apos;32&apos;, &apos;min_threshold&apos;: &apos;4&apos;, &apos;class&apos;: &apos;org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy&apos;}</Compaction>
+      <Compression>{&apos;class&apos;: &apos;org.apache.cassandra.io.compress.LZ4Compressor&apos;, &apos;chunk_length_in_kb&apos;: &apos;64&apos;}</Compression>
+      <DclocalReadRepairChance>0.0</DclocalReadRepairChance>
+      <GcGraceSeconds>0</GcGraceSeconds>
+      <MemtableFlushPeriodInMs>3600000</MemtableFlushPeriodInMs>
+    </table>
+    <table id="13" parent="8" name="calendar">
+      <Caching>{&apos;keys&apos;: &apos;ALL&apos;, &apos;rows_per_partition&apos;: &apos;NONE&apos;}</Caching>
+      <Compaction>{&apos;max_threshold&apos;: &apos;32&apos;, &apos;min_threshold&apos;: &apos;4&apos;, &apos;class&apos;: &apos;org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy&apos;}</Compaction>
+      <Compression>{&apos;class&apos;: &apos;org.apache.cassandra.io.compress.LZ4Compressor&apos;, &apos;chunk_length_in_kb&apos;: &apos;64&apos;}</Compression>
+      <DclocalReadRepairChance>0.1</DclocalReadRepairChance>
+    </table>
+    <table id="14" parent="8" name="katastrofy">
+      <Caching>{&apos;keys&apos;: &apos;ALL&apos;, &apos;rows_per_partition&apos;: &apos;NONE&apos;}</Caching>
+      <Compaction>{&apos;max_threshold&apos;: &apos;32&apos;, &apos;min_threshold&apos;: &apos;4&apos;, &apos;class&apos;: &apos;org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy&apos;}</Compaction>
+      <Compression>{&apos;class&apos;: &apos;org.apache.cassandra.io.compress.LZ4Compressor&apos;, &apos;chunk_length_in_kb&apos;: &apos;64&apos;}</Compression>
+      <DclocalReadRepairChance>0.1</DclocalReadRepairChance>
+    </table>
+    <table id="15" parent="8" name="winner_teams">
+      <Caching>{&apos;keys&apos;: &apos;ALL&apos;, &apos;rows_per_partition&apos;: &apos;NONE&apos;}</Caching>
+      <Compaction>{&apos;max_threshold&apos;: &apos;32&apos;, &apos;min_threshold&apos;: &apos;4&apos;, &apos;class&apos;: &apos;org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy&apos;}</Compaction>
+      <Compression>{&apos;class&apos;: &apos;org.apache.cassandra.io.compress.LZ4Compressor&apos;, &apos;chunk_length_in_kb&apos;: &apos;64&apos;}</Compression>
+      <DclocalReadRepairChance>0.1</DclocalReadRepairChance>
+    </table>
+    <table id="16" parent="8" name="zamestnanci">
+      <Caching>{&apos;keys&apos;: &apos;ALL&apos;, &apos;rows_per_partition&apos;: &apos;NONE&apos;}</Caching>
+      <Compaction>{&apos;max_threshold&apos;: &apos;32&apos;, &apos;min_threshold&apos;: &apos;4&apos;, &apos;class&apos;: &apos;org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy&apos;}</Compaction>
+      <Compression>{&apos;class&apos;: &apos;org.apache.cassandra.io.compress.LZ4Compressor&apos;, &apos;chunk_length_in_kb&apos;: &apos;64&apos;}</Compression>
+      <DclocalReadRepairChance>0.1</DclocalReadRepairChance>
+    </table>
+    <key id="17" parent="10" name="primary key">
+      <ColNames>id</ColNames>
+    </key>
+    <column id="18" parent="10" name="datecreate">
+      <Position>1</Position>
+      <DataType>timestamp|0s</DataType>
+    </column>
+    <column id="19" parent="10" name="firstname">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="20" parent="10" name="id">
+      <Position>3</Position>
+      <DataType>uuid|0s</DataType>
+    </column>
+    <column id="21" parent="10" name="lastname">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="22" parent="10" name="nationality">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <key id="23" parent="11" name="primary key">
+      <ColNames>session_id</ColNames>
+      <ClusterColNames>event_id</ClusterColNames>
+    </key>
+    <column id="24" parent="11" name="activity">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="25" parent="11" name="event_id">
+      <Position>2</Position>
+      <DataType>timeuuid|0s</DataType>
+    </column>
+    <column id="26" parent="11" name="session_id">
+      <Position>3</Position>
+      <DataType>uuid|0s</DataType>
+    </column>
+    <column id="27" parent="11" name="source">
+      <Position>4</Position>
+      <DataType>inet|0s</DataType>
+    </column>
+    <column id="28" parent="11" name="source_elapsed">
+      <Position>5</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="29" parent="11" name="thread">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <key id="30" parent="12" name="primary key">
+      <ColNames>session_id</ColNames>
+    </key>
+    <column id="31" parent="12" name="client">
+      <Position>1</Position>
+      <DataType>inet|0s</DataType>
+    </column>
+    <column id="32" parent="12" name="command">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="33" parent="12" name="coordinator">
+      <Position>3</Position>
+      <DataType>inet|0s</DataType>
+    </column>
+    <column id="34" parent="12" name="duration">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="35" parent="12" name="parameters">
+      <Position>5</Position>
+      <DataType>map&lt;text, text&gt;|0s</DataType>
+    </column>
+    <column id="36" parent="12" name="request">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="37" parent="12" name="session_id">
+      <Position>7</Position>
+      <DataType>uuid|0s</DataType>
+    </column>
+    <column id="38" parent="12" name="started_at">
+      <Position>8</Position>
+      <DataType>timestamp|0s</DataType>
+    </column>
+    <key id="39" parent="13" name="primary key">
+      <ColNames>year</ColNames>
+      <ClusterColNames>month</ClusterColNames>
+    </key>
+    <column id="40" parent="13" name="events">
+      <Position>1</Position>
+      <DataType>list&lt;text&gt;|0s</DataType>
+    </column>
+    <column id="41" parent="13" name="month">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="42" parent="13" name="year">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <key id="43" parent="14" name="primary key">
+      <ColNames>id</ColNames>
+    </key>
+    <column id="44" parent="14" name="id">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="45" parent="14" name="misto">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="46" parent="14" name="udalosti">
+      <Position>3</Position>
+      <DataType>map&lt;int, text&gt;|0s</DataType>
+    </column>
+    <key id="47" parent="15" name="primary key">
+      <ColNames>id</ColNames>
+    </key>
+    <column id="48" parent="15" name="id">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="49" parent="15" name="lastname">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="50" parent="15" name="teams">
+      <Position>3</Position>
+      <DataType>set&lt;text&gt;|0s</DataType>
+    </column>
+    <key id="51" parent="16" name="primary key">
+      <ColNames>zamestnanec_id</ColNames>
+    </key>
+    <column id="52" parent="16" name="jmeno">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="53" parent="16" name="mobil">
+      <Position>2</Position>
+      <DataType>varint|0s</DataType>
+    </column>
+    <column id="54" parent="16" name="plat">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="55" parent="16" name="prijmeni">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="56" parent="16" name="zamestnanec_id">
+      <Position>5</Position>
+      <DataType>int|0s</DataType>
+    </column>
+  </database-model>
+</dataSource>
