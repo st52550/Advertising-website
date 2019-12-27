@@ -1,0 +1,152 @@
+/* CSS Document */
+
+body, html {
+    height: 100%;
+    margin: 0;
+    background-color: #fcfcfc;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    top: 0;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    background-color: #84B3E7;
+}
+
+#header-logo {
+    width: 120px;
+    float: left;
+    margin: 5px 20px 0 0;
+}
+
+#header-title {
+    line-height: 100px;
+    font-size: 32px;
+    float:left;
+}
+
+#login-buttons{
+    line-height: 100px;
+    float: right;
+}
+
+#login-buttons button {
+    color: #0d1117;
+    border: 1px solid #fcfcfc;
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    background-color: #84B3E7;
+    font-size: 14px;
+}
+
+#login-buttons button:hover {
+    color: #0d1117;
+    background-color: #fcfcfc;
+    transition: 0.3s;
+}
+
+#nav-section {
+    top: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #0d1117;
+}
+
+#nav-section nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#nav-section nav button {
+    color: #0d1117;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #84B3E7;
+    font-size: 18px;
+}
+
+
+#nav-section nav button:hover {
+    color: #0d1117;
+    background-color: #fcfcfc;
+    transition: 0.3s;
+}
+
+#sidenav {
+    width: 250px;
+    float: left;
+    background: #eee;
+    overflow-x: hidden;
+    padding: 8px 0;
+}
+
+/* The navigation menu links */
+#sidenav a {
+    padding: 6px 8px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #2196F3;
+    display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+#sidenav a:hover {
+    color: #0d1117;
+}
+
+#items {
+    margin-left: 260px;
+    padding: 0 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    #sidenav {padding-top: 15px;}
+    #sidenav a {font-size: 18px;}
+}
+
+.full-width-wrapper, main {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    min-height: 200px;
+    background-color: #0d1117;
+    color: #fcfcfc;
+}
+
+footer a {
+    color: #fcfcfc;
+    text-decoration: none;
+}
+
+footer a:hover{
+    color: #84B3E7;
+}
+
+
+
