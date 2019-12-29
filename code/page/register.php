@@ -14,10 +14,26 @@ if (isset($_POST["register"])) {
             echo '</script>';
             header("Refresh:0; url=./index.php?page=login");
         } else {
-            echo 'E-mail nebo uživatel již existuje.';
+            echo ("
+            <div class=\"full-width-wrapper\">
+                <div class=\"flex-wrap\">
+                    <div class=\"login-register-form-alert\">
+                        <p>E-mail nebo uživatel již existuje.</p>
+                    </div>    
+                </div>
+            </div>   
+            ");
         }
     } else {
-        echo 'Hesla se neshodují.!';
+        echo ("
+            <div class=\"full-width-wrapper\">
+                <div class=\"flex-wrap\">
+                    <div class=\"login-register-form-alert\">
+                        <p>Hesla se neshodují.</p>
+                    </div>    
+                </div>
+            </div>   
+            ");
     }
 }
 ?>
@@ -25,12 +41,13 @@ if (isset($_POST["register"])) {
 <div class="full-width-wrapper">
     <div class="flex-wrap">
         <div class="login-register-form">
+            <h2>Registrovat se</h2><br>
             <form action="" method="post">
                 <label>Přihlašovací jméno:<input type="text" placeholder="Vaše přezdívka" name="username" required></label>
                 <label>E-mail:<input type="email" placeholder="Váš e-mail" name="email" required></label>
                 <label>Heslo:<input type="password" placeholder="Heslo" name="password" required></label>
                 <label>Potvrzení hesla:<input type="password" placeholder="Ověření hesla" name="password_check" required></label>
-                <input type="submit" name="register" value="Registrovat">
+                <input type="submit" name="register" value="Registrovat se">
             </form>
         </div>
     </div>

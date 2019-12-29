@@ -14,7 +14,15 @@ if (isset($_POST["login"])) {
             header("Refresh:0; url=./index.php?page=my_account");
         }
     } else {
-        echo "Nesprávné jméno nebo heslo.";
+        echo ("
+            <div class=\"full-width-wrapper\">
+                <div class=\"flex-wrap\">
+                    <div class=\"login-register-form-alert\">
+                        <p>Nesprávné jméno nebo heslo.</p>
+                    </div>   
+                </div>
+            </div>   
+            ");
     }
 }
 ?>
@@ -22,10 +30,11 @@ if (isset($_POST["login"])) {
 <div class="full-width-wrapper">
     <div class="flex-wrap">
         <div class="login-register-form">
+            <h2>Přihlásit se</h2><br>
             <form method="post">
                 <label>Uživatelské jméno:<input type="text" placeholder="Vaše přezdívka" name="username" required></label>
                 <label>Heslo:<input type="password" placeholder="Heslo" name="password" required></label>
-                <label id="form-checkbox-lable">Zůstat přihlášen<input type="checkbox" name="autologin" value="1"></label>
+                <label id="form-checkbox-label">Zůstat přihlášen<input type="checkbox" name="autologin" value="1"></label>
                 <input type="submit" name="login" value="Přihlásit se">
             </form>
         </div>

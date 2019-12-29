@@ -68,7 +68,7 @@ header {
     justify-content: center;
 }
 
-#nav-section nav button {
+.nav-section-button {
     color: #0d1117;
     border-width: 1px 1px 1px 0;
     border-style: solid;
@@ -83,11 +83,15 @@ header {
     background-color: #84B3E7;
 }
 
-
-#nav-section nav button:hover {
+.nav-section-button:hover {
     color: #0d1117;
     background-color: #fcfcfc;
     transition: 0.3s;
+}
+
+.nav-section-button-active {
+    background-color: #b3e784;
+    color: #0d1117;
 }
 
 #sidenav {
@@ -126,6 +130,7 @@ header {
 .full-width-wrapper, main {
     width: 960px;
     margin: 0 auto;
+    position: relative;
 }
 
 .flex-wrap {
@@ -135,13 +140,17 @@ header {
 }
 
 footer {
-    right: 0;
     bottom: 0;
-    left: 0;
-    position: relative;
+    top:0;
+    left:0;
     min-height: 200px;
     background-color: #0d1117;
     color: #fcfcfc;
+    float:left;
+    width:100%;
+    height: auto;
+    position: relative;
+    display: block;
 }
 
 footer a {
@@ -160,6 +169,14 @@ footer a:hover {
     background: #eee;
 }
 
+.login-register-form-alert {
+    width: 100%;
+    background: #f69999;
+    text-align: center;
+    padding: 10px;
+    margin: 50px 50px 0 50px;
+}
+
 .login-register-form input, select {
     width: 100%;
     padding: 12px 20px;
@@ -175,7 +192,7 @@ footer a:hover {
     vertical-align: middle;
 }
 
-#form-checkbox-lable {
+#form-checkbox-label {
     display: inline-block;
     white-space: nowrap;
 }
@@ -185,21 +202,15 @@ footer a:hover {
     align-items: center;
 }
 
+.login-register-form input[type=submit] {
+    background: #dedede;
+}
+
 .login-register-form input[type=submit]:hover {
     background-color: #84B3E7;
     color: white;
     cursor: pointer;
     transition: 0.3s;
-}
-
-.search-form input, select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
 }
 
 .sidenav-button{
@@ -223,6 +234,72 @@ footer a:hover {
     background-color: #84B3E7;
     color: white;
     cursor: pointer;
+}
+
+.search-form input[type=text], input[type=submit], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.search-form input[type=radio]{
+    cursor: pointer;
+    margin: 0 10px 0 10px;
+}
+
+.search-form input[type=checkbox]{
+    cursor: pointer;
+    margin: 0 20px 0 20px;
+}
+
+.search-form input[type=submit]{
+    cursor: pointer;
+    background: #dedede;
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+}
+
+.search-form input[type=submit]:hover{
+    background-color: #84B3E7;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#form-search-checkboxs label{
+    padding: 5px;
+    white-space: nowrap;
+    line-height: 30px;
+}
+
+.search-from-to {
+    display: inline-flex;
+}
+
+.search-from-to label {
+    white-space: nowrap;
+}
+
+.item-row {
+    background: #eeeeee;
+    width: 100%;
+    height: 200px;
+    padding: 15px;
+}
+
+.item-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.item-date {
+    float: right;
 }
 
 
