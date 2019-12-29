@@ -1,12 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Josef Plášil
- * Date: 4.11.19
- * Time: 8:37
- */
-
-
+session_start();
+include './data/database.php';
+include './data/auto_login.php';
+include_once './data/function.php';
 ?>
 
 <!DOCTYPE html>
@@ -16,35 +12,77 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="./style/layout.css">
-    <title>Najdi bydlení</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Najdi bydlení - inzerce bytů a domů</title>
 </head>
 
 <body>
     <header>
         <div class="full-width-wrapper">
-            <img id="header-logo" src="./img/logo.png" width="128" height="128" alt="Logo">
+            <a href="./index.php"><img id="header-logo" src="./img/logo.png" width="128" height="128" alt="Logo"></a>
             <div id="header-title"><b>Najdibydlení.cz</b></div>
             <div id="login-buttons">
-                <button>Přihlášení</button>
-                <button>Registrace</button>
+                <?php
+                if (isset($_SESSION["user_id"])) {
+                    echo ("<button type=\"button\" onclick=\"location.href='?page=logout'\">Odhlásit se</button>");
+                } else {
+                    echo ("<button type=\"button\" onclick=\"location.href='?page=login'\">Přihlášení</button>");
+                    echo ("<button type=\"button\" onclick=\"location.href='?page=register'\">Registrace</button>");
+                }
+                ?>
             </div>
         </div>
     </header>
 
     <section id="nav-section">
         <nav>
-            <button>Prvni</button>
-            <button>Druhy</button>
-            <button>Treti</button>
+
+
+            <?php
+            if (isset($_SESSION["user_id"])) {
+                $role = getRole($_SESSION["user_id"]);
+                echo ("<button type=\"button\" onclick=\"location.href='./index.php'\">Inzeráty</button>");
+                echo ("<button type=\"button\" onclick=\"location.href=''\">Druhý</button>");
+                echo ("<button type=\"button\" onclick=\"location.href=''\">Kontakt</button>");
+                echo ("<button type=\"button\" onclick=\"location.href='?page=my_account'\">Můj profil</button>");
+                if($role == 'admin') {
+                    echo ("<button type=\"button\" onclick=\"location.href=''\">Správa uživatelů</button>");
+                    echo ("<button type=\"button\" onclick=\"location.href=''\">Správa inzerátů</button>");
+                    echo ("<button type=\"button\" onclick=\"location.href=''\">Správa dat</button>");
+                }
+            } else {
+                echo ("<button type=\"button\" onclick=\"location.href='./index.php'\">Inzeráty</button>");
+                echo ("<button type=\"button\" onclick=\"location.href=''\">Druhý</button>");
+                echo ("<button type=\"button\" onclick=\"location.href=''\">Kontakt</button>");
+            }
+            ?>
         </nav>
     </section>
 
+    <?php
+    $page = "";
+    if (isset($_GET["page"])) {
+        $page = $_GET["page"];
+        if ($page == "logout") {
+            include './data/logout.php';
+            header("Refresh:0; url=./index.php");
+        }
+        switch ($page) {
+            case "login" : include './page/login.php'; break;
+            case "register" : include './page/register.php'; break;
+            case "my_account" : include './page/my_account.php'; break;
+        }
+    } else {
+    ?>
+
     <main>
         <div id="sidenav">
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Clients</a>
-            <a href="#">Contact</a>
+            <h3>Vyhledávání inzerátů</h3><br>
+
+            <?php
+                include "./page/search-form.php";
+            ?>
         </div>
 
         <div id="items">
@@ -60,13 +98,17 @@
         </div>
     </main>
 
+        <?php
+    }
+    ?>
+
     <footer>
         <div class="full-width-wrapper">
             <div class="flex-wrap">
                 <section>
                     <h4>Odkazy</h4>
                     <ul>
-                        <li><a href="#">Domů</a> </li>
+                        <li><a href="./index.php">Inzeráty</a> </li>
                         <li><a href="#">Přihlášení</a> </li>
                         <li><a href="#">Registrace</a> </li>
                         <li><a href="#">Kontakt</a> </li>
@@ -74,7 +116,7 @@
                 </section>
 
                 <section>
-                    <p><b>©2020</b><a href="https://github.com"><b>Josef Plášil</b></a></p>
+                    <p><a href="https://github.com"><h4>©2020 Josef Plášil</h4></a></p>
                 </section>
             </div>
         </div>

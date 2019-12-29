@@ -2,12 +2,14 @@
 
 body, html {
     height: 100%;
-    margin: 0;
     background-color: #fcfcfc;
 }
 
 body {
     font-family: 'Roboto', sans-serif;
+    position: relative;
+    margin: 0;
+    min-height: 100%;
 }
 
 header {
@@ -37,17 +39,18 @@ header {
 
 #login-buttons button {
     color: #0d1117;
-    border: 1px solid #fcfcfc;
+    border: 1px solid #0d1117;
     cursor: pointer;
     width: 100px;
     height: 50px;
+    margin-left: 5px;
     text-align: center;
     background-color: #84B3E7;
-    font-size: 14px;
 }
 
 #login-buttons button:hover {
     color: #0d1117;
+    border-color: #fcfcfc;
     background-color: #fcfcfc;
     transition: 0.3s;
 }
@@ -67,16 +70,17 @@ header {
 
 #nav-section nav button {
     color: #0d1117;
-    border: none;
+    border-width: 1px 1px 1px 0;
+    border-style: solid;
+    border-color: #0d1117;
     cursor: pointer;
-    width: 100px;
+    width: 90px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     background-color: #84B3E7;
-    font-size: 18px;
 }
 
 
@@ -91,14 +95,14 @@ header {
     float: left;
     background: #eee;
     overflow-x: hidden;
-    padding: 8px 0;
+    padding: 10px;
+    text-align: center;
 }
 
 /* The navigation menu links */
 #sidenav a {
     padding: 6px 8px;
     text-decoration: none;
-    font-size: 18px;
     color: #2196F3;
     display: block;
 }
@@ -109,8 +113,8 @@ header {
 }
 
 #items {
-    margin-left: 260px;
-    padding: 0 10px;
+    margin-left: 270px;
+    padding: 10px;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
@@ -131,9 +135,10 @@ header {
 }
 
 footer {
-    left: 0;
+    right: 0;
     bottom: 0;
-    width: 100%;
+    left: 0;
+    position: relative;
     min-height: 200px;
     background-color: #0d1117;
     color: #fcfcfc;
@@ -144,8 +149,80 @@ footer a {
     text-decoration: none;
 }
 
-footer a:hover{
+footer a:hover {
     color: #84B3E7;
+}
+
+.login-register-form {
+    width: 100%;
+    margin: 50px;
+    padding: 50px;
+    background: #eee;
+}
+
+.login-register-form input, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-register-form input[type=checkbox]{
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+#form-checkbox-lable {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.login-register-form label{
+    white-space: pre-wrap;
+    align-items: center;
+}
+
+.login-register-form input[type=submit]:hover {
+    background-color: #84B3E7;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-form input, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.sidenav-button{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background: #eee;
+    color: #0d1117;
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
+.sidenav-button:hover {
+    background-color: #84B3E7;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sidenav-button-active {
+    background-color: #84B3E7;
+    color: white;
+    cursor: pointer;
 }
 
 
