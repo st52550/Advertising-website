@@ -79,76 +79,10 @@ include_once './data/function.php';
     <main>
         <div id="sidenav">
             <h3>Vyhledávání inzerátů</h3><br>
-            <form action="" method="post">
-                <input type="radio" name="radio1" value="Radio 1" checked>Pronájem
-                <input type="radio" name="radio1" value="Radio 2">Prodej
-            </form>
-            <br>
-            <div id="choice-buttons">
-                <button id="button-city" class="sidenav-button sidenav-button-active">Dle města</button>
-                <button id="button-region" class="sidenav-button">Dle kraje</button>
-            </div>
 
-            <script>
-                var header = document.getElementById("choice-buttons");
-                var buttons = header.getElementsByClassName("sidenav-button");
-                for (var i = 0; i < buttons.length; i++) {
-                    buttons[i].addEventListener("click", function() {
-                        var current = document.getElementsByClassName("sidenav-button-active");
-                        current[0].className = current[0].className.replace(" sidenav-button-active", "");
-                        this.className += " sidenav-button-active";
-                    });
-                }
-            </script>
-
-            <br>
-            <div id="search-city">
-                <div class="search-form">
-                    <form method="post">
-                        <input type="text" placeholder="Vyhledat město" name="mesto">
-                    </form>
-                </div><br>
-            </div>
-
-            <div id="search-region" style="display: none">
-                    <select>
-                        <?php
-                        $regions = getRegions();
-                        if ($regions->num_rows > 0) {
-                            while ($rowRegion = $regions->fetch_assoc()) {
-                                $region = $rowRegion['name'];
-                                echo "<option>$region</option>";
-                            }
-                        }
-                        ?>
-                    </select>
-                <br><br>
-            </div>
-
-            <script>
-                var buttonCity = document.getElementById('button-city');
-                buttonCity.onclick = function() {
-                    var divCity = document.getElementById('search-city');
-                    var divRegion = document.getElementById('search-region');
-                    if (divCity.style.display === 'none') {
-                        divCity.style.display = 'block';
-                        divRegion.style.display = 'none';
-                    }
-                };
-
-                var buttonRegion = document.getElementById('button-region');
-                buttonRegion.onclick = function() {
-                    var divRegion = document.getElementById('search-region');
-                    var divCity = document.getElementById('search-city');
-                    if (divRegion.style.display === 'none') {
-                        divRegion.style.display = 'block';
-                        divCity.style.display = 'none';
-                    }
-                };
-            </script>
-
-            <label>Vyberte typ:
-            </label>
+            <?php
+                include "./page/search-form.php";
+            ?>
         </div>
 
         <div id="items">

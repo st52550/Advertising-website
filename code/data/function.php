@@ -1,11 +1,11 @@
 <?php
-function existUser($email, $userName) {
-    $exist = FALSE;
-    $servername = "localhost";
-    $username = "root";
-    $password = "Database1001";
-    $dbname = 'db_dev';
+$servername = "localhost";
+$username = "root";
+$password = "Database1001";
+$dbname = 'db_dev';
 
+function existUser($email, $userName) {
+    global $servername, $username, $password, $dbname;
 
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error) {
@@ -24,12 +24,7 @@ function existUser($email, $userName) {
 }
 
 function getRole($id) {
-    $servername = "localhost";
-    $username = "root";
-    $password = "Database1001";
-    $dbname = 'db_dev';
-    $role = null;
-
+    global $servername, $username, $password, $dbname;
 
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error) {
@@ -48,10 +43,7 @@ function getRole($id) {
 }
 
 function getRegions() {
-    $servername = "localhost";
-    $username = "root";
-    $password = "Database1001";
-    $dbname = 'db_dev';
+    global $servername, $username, $password, $dbname;
 
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error) {
@@ -59,13 +51,17 @@ function getRegions() {
     }
 
     $sql = "SELECT name FROM regions";
-    /*
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $region = $row["name"];
-        }
+    return $conn->query($sql);
+}
+
+function getCategories() {
+    global $servername, $username, $password, $dbname;
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
-    echo count($region);
-    */
+
+    $sql = "SELECT name FROM categories";
     return $conn->query($sql);
 }

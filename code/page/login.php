@@ -23,9 +23,9 @@ if (isset($_POST["login"])) {
     <div class="flex-wrap">
         <div class="login-register-form">
             <form method="post">
-                Uživatelské jméno:<input type="text" placeholder="Vaše přezdívka" name="username" required>
-                Heslo:<input type="password" placeholder="Heslo" name="password" required>
-                <label>Zůstat&nbsppřihlášen<input type="checkbox" name="autologin" value="1"></label>
+                <label>Uživatelské jméno:<input type="text" placeholder="Vaše přezdívka" name="username" required></label>
+                <label>Heslo:<input type="password" placeholder="Heslo" name="password" required></label>
+                <label id="form-checkbox-lable">Zůstat přihlášen<input type="checkbox" name="autologin" value="1"></label>
                 <input type="submit" name="login" value="Přihlásit se">
             </form>
         </div>

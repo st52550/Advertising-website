@@ -170,14 +170,19 @@ footer a:hover {
     box-sizing: border-box;
 }
 
-.login-register-form input[type=submit]{
+.login-register-form input[type=checkbox]{
     cursor: pointer;
+    vertical-align: middle;
+}
+
+#form-checkbox-lable {
+    display: inline-block;
+    white-space: nowrap;
 }
 
 .login-register-form label{
-    display: flex;
+    white-space: pre-wrap;
     align-items: center;
-    cursor: pointer;
 }
 
 .login-register-form input[type=submit]:hover {
