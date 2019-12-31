@@ -130,22 +130,35 @@ CREATE TABLE IF NOT EXISTS `db_dev`.`messages` (
                                                    `message` TEXT NOT NULL,
                                                    `publication_date` DATETIME NOT NULL,
                                                    `USERS_sender_id` INT(6) NOT NULL,
-                                                   `USERS_reciever_id1` INT(6) NOT NULL,
                                                    PRIMARY KEY (`message_id`),
                                                    INDEX `fk_ITEM_COMMENT_USERS1_idx` (`USERS_sender_id` ASC),
-                                                   INDEX `fk_MESSAGES_USERS1_idx` (`USERS_reciever_id1` ASC),
                                                    CONSTRAINT `fk_ITEM_COMMENT_USERS1`
                                                        FOREIGN KEY (`USERS_sender_id`)
-                                                           REFERENCES `db_dev`.`users` (`user_id`)
-                                                           ON DELETE NO ACTION
-                                                           ON UPDATE NO ACTION,
-                                                   CONSTRAINT `fk_MESSAGES_USERS1`
-                                                       FOREIGN KEY (`USERS_reciever_id1`)
                                                            REFERENCES `db_dev`.`users` (`user_id`)
                                                            ON DELETE NO ACTION
                                                            ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `db_dev`.`messages_recipients`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_dev`.`messages_recipients` (
+                                                              `messages_message_id` INT(6) NOT NULL AUTO_INCREMENT,
+                                                              `users_user_id` INT(6) NOT NULL,
+                                                              PRIMARY KEY (`messages_message_id`, `users_user_id`),
+                                                              INDEX `fk_messages_has_users_users1_idx` (`users_user_id` ASC),
+                                                              INDEX `fk_messages_has_users_messages1_idx` (`messages_message_id` ASC),
+                                                              CONSTRAINT `fk_messages_has_users_messages1`
+                                                                  FOREIGN KEY (`messages_message_id`)
+                                                                      REFERENCES `db_dev`.`messages` (`message_id`)
+                                                                      ON DELETE NO ACTION
+                                                                      ON UPDATE NO ACTION,
+                                                              CONSTRAINT `fk_messages_has_users_users1`
+                                                                  FOREIGN KEY (`users_user_id`)
+                                                                      REFERENCES `db_dev`.`users` (`user_id`)
+                                                                      ON DELETE NO ACTION
+                                                                      ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `db_dev`.`cities`
@@ -168,6 +181,25 @@ INSERT INTO `cities` (`city_id`, `name`, `regions_region_id`) VALUES
 (NULL, 'Chrudim', 2),
 (NULL, 'Svitavy', 2);
 
+-- -----------------------------------------------------
+-- Table `db_dev`.`images`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_dev`.`images` (
+                                                 `image_id` INT NOT NULL AUTO_INCREMENT,
+                                                 `name` VARCHAR(75) NOT NULL,
+                                                 `path` VARCHAR(256) NOT NULL,
+                                                 `items_item_id` INT(5) NOT NULL,
+                                                 PRIMARY KEY (`image_id`),
+                                                 INDEX `fk_images_items1_idx` (`items_item_id` ASC),
+                                                 CONSTRAINT `fk_images_items1`
+                                                     FOREIGN KEY (`items_item_id`)
+                                                         REFERENCES `db_dev`.`items` (`item_id`)
+                                                         ON DELETE NO ACTION
+                                                         ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
+
+INSERT INTO `images` (`image_id`, `name`, `path`, `items_item_id`) VALUES
+(NULL, 'no-image.PNG', '../pics/no-image.PNG', 1);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

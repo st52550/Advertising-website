@@ -1,7 +1,7 @@
 <div class="search-form">
     <form action="" method="post">
-        <label><input type="radio" name="radio1" value="Radio 1" checked>Pronájem</label>
-        <label><input type="radio" name="radio1" value="Radio 2">Prodej&nbsp;&nbsp;</label>
+        <label><input type="radio" name="radio1" value="Pronájem" checked>Pronájem</label>
+        <label><input type="radio" name="radio1" value="Prodej">Prodej&nbsp;&nbsp;</label>
         <br><br>
         <div id="choice-buttons">
             <button type="button" id="button-city" class="sidenav-button sidenav-button-active">Dle města</button>
@@ -22,12 +22,12 @@
 
         <br>
         <div id="search-city">
-            <label><input type="text" placeholder="Vyhledat město" name="mesto"></label>
+            <label><input type="text" placeholder="Vyhledat město" name="city"></label>
             <br><br>
         </div>
 
         <div id="search-region" style="display: none">
-            <label><select>
+            <label><select name="region">
                 <?php
                 $regions = getRegions();
                 if ($regions->num_rows > 0) {
@@ -64,7 +64,7 @@
         </script>
 
         <label>Co sháním
-            <select id="selectCategory" onchange="categoryChange()">
+            <select name="category" id="selectCategory" onchange="categoryChange()">
                 <?php
                 $categories = getCategories();
                 if ($categories->num_rows > 0) {
@@ -85,7 +85,7 @@
             if ($rooms->num_rows > 0) {
                 while ($rowRoom = $rooms->fetch_assoc()) {
                     $room = $rowRoom['name'];
-                    echo "<label>$room<input type='checkbox' name=\"rooms[]\" value='$room'></label>";
+                    echo "<label>$room<input type='checkbox' name='rooms[]' value='$room'></label>";
                 }
             }
             ?>

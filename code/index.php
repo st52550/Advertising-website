@@ -13,6 +13,7 @@ include_once './data/function.php';
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="./style/layout.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Najdi bydlení - inzerce bytů a domů</title>
 </head>
@@ -50,7 +51,7 @@ include_once './data/function.php';
                 }
                 echo ("<button id=\"contact\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=contact'\">Kontakt</button>");
             } else {
-                echo ("<button id=\"ad\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=ad'\">Inzeráty</button>");
+                echo ("<button id=\"ads\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=ads'\">Inzeráty</button>");
                 echo ("<button id=\"contact\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=contact'\">Kontakt</button>");
             }
             ?>
@@ -95,6 +96,7 @@ include_once './data/function.php';
                 include './page/manage_data.php';
                 echo "<script>let active = document.getElementById('manage-data'); active.className += \" nav-section-button-active\";</script>";
                 break;
+            case "details" : include './page/details.php'; break;
         }
     } else {
         if (basename($_SERVER['PHP_SELF']) == 'index.php') {
