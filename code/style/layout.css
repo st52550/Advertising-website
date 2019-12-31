@@ -288,8 +288,13 @@ footer a:hover {
 .item-row {
     background: #eeeeee;
     width: 100%;
-    height: 200px;
-    padding: 15px;
+    height: 220px;
+    padding: 5px 15px 15px 15px;
+    margin-bottom: 10px;
+}
+
+.information {
+    float: left;
 }
 
 .item-title {
@@ -299,8 +304,137 @@ footer a:hover {
 }
 
 .item-date {
-    float: right;
+    padding: 5px;
+    margin-left: -15px;
+    background: #f69999;
 }
+
+.information-link {
+    text-decoration: none;
+    color: #2196F3;
+    background: #dedede;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.information-link:hover {
+    color: #fcfcfc;
+    background: #84B3E7;
+    transition: 0.3s;
+}
+
+.image-container {
+    float: right;
+    padding: 5px;
+    height: 220px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.item-details {
+    width: 100%;
+    padding: 20px;
+    margin: 20px 0;
+    background: #eee;
+    text-align: center;
+}
+
+.item-details table {
+    border-collapse: separate;
+    border-spacing: 30px 0;
+    margin: 0 auto;
+}
+
+.item-details table tr {
+    text-align: left;
+}
+
+.item-description {
+    padding: 1px 20px 20px 20px;
+    margin: 20px 0;
+    background: #dedede;
+}
+
+.item-image-container {
+    padding: 5px;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-image-container img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.slide-button {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background: #eee;
+    color: #0d1117;
+    padding: 9px 15px;
+    cursor: pointer;
+}
+
+.slide-button:hover {
+    background-color: #84B3E7;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.slide-button-active {
+    background: #84B3E7;
+    color: #fcfcfc;
+}
+
+.message-form {
+    width: 75%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.message-form input, textarea{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.message-form textarea {
+    min-height: 200px;
+}
+
+.message-form label{
+    white-space: pre-wrap;
+    align-items: center;
+}
+
+.message-form input[type=submit] {
+    background: #dedede;
+}
+
+.message-form input[type=submit]:hover {
+    background-color: #84B3E7;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
 
 
 
