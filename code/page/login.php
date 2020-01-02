@@ -2,12 +2,13 @@
 if (isset($_POST["login"])) {
     $name = $_POST["username"];
     $passwd = md5($_POST["password"]);
-    $sql = "SELECT user_id, username FROM users where username = '" . htmlspecialchars($name) . "' and password = '" . htmlspecialchars($passwd) . "'";
+    $sql = "SELECT user_id, username, email FROM users where username = '" . htmlspecialchars($name) . "' and password = '" . htmlspecialchars($passwd) . "'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $_SESSION["user_id"] = $row["user_id"];
             $_SESSION["username"] = $row["username"];
+            $_SESSION["user_email"] = $row["email"];
             if (isset($_POST["autologin"])) {
                 setcookie("user_id", $_SESSION["user_id"], time() + (86400 * 7), "/");
             }

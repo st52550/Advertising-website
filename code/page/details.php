@@ -12,6 +12,7 @@ if (isset($_GET["item"])) {
     } catch (Exception $e){echo 'Message: ' .$e->getMessage();}
     $itemPrice = number_format($row["price"], 0, '.', ' ');
     $itemUser = $row["username"];
+    $itemUserMail = $row["email"];
     $itemCategory = $row["category"];
     $itemTitle = $row["title"];
     $itemDescription = $row["description"];
@@ -22,6 +23,11 @@ if (isset($_GET["item"])) {
     $itemType = $row["type"];
 
     $pictures = getPictures($idItem);
+
+    $actualUserMail = '';
+    if (isset($_SESSION["user_email"])) {
+        $actualUserMail = $_SESSION["user_email"];
+    }
 }
 ?>
 
@@ -114,17 +120,26 @@ if (isset($_GET["item"])) {
                 } else {
                     echo "<img src= './img/no-image.PNG' alt='no-image'></div>";
                 }
-                echo "     
-                    <h3 style='margin-top: 30px'>Kontaktovat:</h3>
+                if ($itemUserMail != $actualUserMail) {
+                    echo "     
+                    <h3 style='margin-top: 30px'>Kontaktovat</h3>
                     <div class=\"message-form\">
                         <form action=\"\" method=\"post\">
-                            <label>Vaše jméno:<input type=\"text\" placeholder=\"Vaše přezdívka\" name=\"username\" required></label>
-                            <label>E-mail:<input type=\"email\" placeholder=\"Váš e-mail\" name=\"email\" required></label>
-                            <label>Zpráva:<textarea id=\"subject\" name=\"subject\" placeholder=\"Vaše zpráva ..\"></textarea></label>
-                            <input type=\"submit\" name=\"register\" value=\"Odeslat zprávu\">
+                            <label>Komu:<input type=\"text\" value=\"$itemUserMail\" name=\"recipient-mail\" readonly></label>
+                            <label>Vaše jméno:<input type=\"text\" placeholder=\"Vaše přezdívka\" name=\"sender-name\" required></label>
+                            <label>E-mail:<input type=\"email\" placeholder=\"Váš e-mail\" name=\"sender-email\" required></label>
+                            <label>Zpráva:<textarea name=\"message\" placeholder=\"Vaše zpráva...\" required></textarea></label>
+                            <input type=\"submit\" name=\"send-message\" value=\"Odeslat zprávu\">
                         </form>
                     </div>
-                ";
+                    ";
+                } else {
+                    echo "     
+                    <h3 style='margin-top: 30px'>Spravovat inzerát</h3>
+                    ";
+                }
+
+            include 'send_message.php';
             ?>
         </div>
     </div>
