@@ -177,6 +177,14 @@ footer a:hover {
     margin: 50px 50px 0 50px;
 }
 
+.message-form-alert {
+    width: 100%;
+    background: #b3e784;
+    text-align: center;
+    padding: 10px;
+    margin: 50px 50px 0 50px;
+}
+
 .login-register-form input, select {
     width: 100%;
     padding: 12px 20px;
@@ -356,6 +364,14 @@ footer a:hover {
     text-align: left;
 }
 
+.messages-table {
+    width: 100%;
+}
+
+.messages-table tr td {
+    width: 20%;
+}
+
 .item-description {
     padding: 1px 20px 20px 20px;
     margin: 20px 0;
@@ -434,6 +450,33 @@ footer a:hover {
     transition: 0.3s;
 }
 
+.global-button{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background: #dedede;
+    color: #0d1117;
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
+.global-button:hover {
+    background: #84B3E7;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.global-button-active {
+    background: #84B3E7;
+    color: white;
+}
+
+#message-text {
+    background: #dedede;
+    padding: 10px;
+    margin: 5px 0;
+}
 
 
 

@@ -26,6 +26,8 @@ include_once './data/function.php';
             <div id="login-buttons">
                 <?php
                 if (isset($_SESSION["user_id"])) {
+                    $username = $_SESSION["username"];
+                    echo ("Přihlášen: <b>$username</b> ");
                     echo ("<button type=\"button\" onclick=\"location.href='?page=logout'\">Odhlásit se</button>");
                 } else {
                     echo ("<button type=\"button\" onclick=\"location.href='?page=login'\">Přihlášení</button>");
@@ -43,16 +45,15 @@ include_once './data/function.php';
                 $role = getRole($_SESSION["user_id"]);
                 echo ("<button id=\"ads\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=ads'\">Inzeráty</button>");
                 echo ("<button id=\"my-ad\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=my_ads'\">Moje inzeráty</button>");
+                echo ("<button id=\"my-news\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=my_news'\">Moje zprávy</button>");
                 echo ("<button id=\"profile\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=my_account'\">Můj profil</button>");
                 if($role == 'admin') {
                     echo ("<button id=\"manage-users\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=manage_users'\">Správa uživatelů</button>");
                     echo ("<button id=\"manage-ads\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=manage_ads'\">Správa inzerátů</button>");
                     echo ("<button id=\"manage-data\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=manage_data'\">Správa dat</button>");
                 }
-                echo ("<button id=\"contact\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=contact'\">Kontakt</button>");
             } else {
                 echo ("<button id=\"ads\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=ads'\">Inzeráty</button>");
-                echo ("<button id=\"contact\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=contact'\">Kontakt</button>");
             }
             ?>
         </nav>
@@ -76,9 +77,9 @@ include_once './data/function.php';
                 include './page/my_account.php';
                 echo "<script>let active = document.getElementById('profile'); active.className += \" nav-section-button-active\";</script>";
                 break;
-            case "contact" :
-                include './page/contact.php';
-                echo "<script>let active = document.getElementById('contact'); active.className += \" nav-section-button-active\";</script>";
+            case "my_news" :
+                include './page/my_messages.php';
+                echo "<script>let active = document.getElementById('my-news'); active.className += \" nav-section-button-active\";</script>";
                 break;
             case "my_ads" :
                 include './page/my_ads.php';
