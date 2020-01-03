@@ -11,9 +11,9 @@ include 'send_message.php';
 <div class="full-width-wrapper">
     <div class="flex-wrap">
         <div class="item-details">
-            <button id="new" type="button" class="global-button" onclick="">Nová zpráva</button>
-            <button id="delivered" class="global-button global-button-active" onclick="">Doručené zprávy</button>
-            <button id="sent" class="global-button" onclick="">Odeslané zprávy</button>
+            <button id="new" type="button" class="global-button">Nová zpráva</button>
+            <button id="delivered" class="global-button global-button-active">Doručené zprávy</button>
+            <button id="sent" class="global-button">Odeslané zprávy</button>
             <br><br>
         <div id="divs">
             <div id="delivered-messages">
@@ -38,7 +38,7 @@ include 'send_message.php';
                                 <td><b>$senderName</b></td>
                                 <td>$senderEmail</td>
                                 <td>$publicationDate</td>
-                                <td><button id='pos $messagesPosition' type='button' class='pos global-button' onclick='showHideMessage(this.id)'>Zobrazit/skrýt zprávu</button></td>
+                                <td><button id='pos $messagesPosition' type='button' class='pos global-button' onclick='showHideMessage(this.id)'>Zobrazit/skrýt zprávu</button></td>                           
                                 </tr>
                                 </table>
                                 ";
@@ -74,7 +74,7 @@ include 'send_message.php';
             <div id="new-message" style="display: none">
                 <div class="message-form">
                     <form action="" method="post">
-                        <label>Komu:<input type="text" placeholder="Uživatelské jméno (více adresátů oddělujeme čárkou)" name="recipients" required></label>
+                        <label>Komu:<input type="text" placeholder="Uživatelské jméno (více adresátů oddělujte čárkou)" name="recipients" required></label>
                         <label>Zpráva:<textarea name="user-message" placeholder="Vaše zpráva..." required></textarea></label>
                         <input type="submit" name="send-user-message" value="Odeslat zprávu">
                     </form>
@@ -116,7 +116,7 @@ include 'send_message.php';
                         <td>$recipientsMails</td>
                         <td>$publicationDate</td>
                         <td>Přečteno: $readedMessage</td>
-                        <td><button id='pos $messagesPosition' type='button' class='pos global-button' onclick='showHideMessage(this.id)'>Zobrazit/skrýt zprávu</button></td>
+                        <td><button id='pos $messagesPosition' type='button' class='pos global-button' onclick='showHideMessage(this.id)'>Zobrazit/skrýt zprávu</button></td>                        
                         </tr>
                         </table>
                         

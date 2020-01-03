@@ -115,7 +115,7 @@ if (isset($_GET["item"])) {
                           x[slideIndex-1].style.display = \"block\";  
                           dots[slideIndex-1].className += \" slide-button-active\";
                         }
-                    </script>
+                    </script>   
                     ";
                 } else {
                     echo "<img src= './img/no-image.PNG' alt='no-image'></div>";
@@ -134,8 +134,11 @@ if (isset($_GET["item"])) {
                     </div>
                     ";
                 } else {
-                    echo "     
-                    <h3 style='margin-top: 30px'>Spravovat inzerát</h3>
+                    echo " 
+                    <br><br><div>    
+                    <a class=\"information-link\" href=\"?page=edit_ad&item=$idItem\">Upravit</a>
+                    <a class=\"information-link\" href=\"?page=delete_ad&item=$idItem\" onclick=\"return confirm('Opravdu chcete inzerát smazat?')\">Odstranit</a>
+                    </div>
                     ";
                 }
 

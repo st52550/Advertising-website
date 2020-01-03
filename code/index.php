@@ -98,6 +98,9 @@ include_once './data/function.php';
                 echo "<script>let active = document.getElementById('manage-data'); active.className += \" nav-section-button-active\";</script>";
                 break;
             case "details" : include './page/details.php'; break;
+            case "delete_ad" : include './page/delete_ad.php'; break;
+            case "edit_ad" : include './page/edit_ad.php'; break;
+            case "delete_image" : include './page/delete_image.php'; break;
         }
     } else {
         if (basename($_SERVER['PHP_SELF']) == 'index.php') {

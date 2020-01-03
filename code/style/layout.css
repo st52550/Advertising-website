@@ -185,6 +185,14 @@ footer a:hover {
     margin: 50px 50px 0 50px;
 }
 
+.new-ad-form-alert {
+    width: 80%;
+    background: #b3e784;
+    text-align: center;
+    padding: 10px;
+    margin: 0 auto;
+}
+
 .login-register-form input, select {
     width: 100%;
     padding: 12px 20px;
@@ -264,6 +272,10 @@ footer a:hover {
     margin: 0 20px 0 20px;
 }
 
+.search-form textarea {
+    min-height: 200px;
+}
+
 .search-form input[type=submit]{
     cursor: pointer;
     background: #dedede;
@@ -299,6 +311,15 @@ footer a:hover {
     height: 220px;
     padding: 5px 15px 15px 15px;
     margin-bottom: 10px;
+}
+
+.user-item-row {
+    background: #fcfcfc;
+    width: 95%;
+    height: 220px;
+    text-align: left;
+    padding: 5px 15px 15px 15px;
+    margin: 0 auto 10px;
 }
 
 .information {
@@ -366,6 +387,7 @@ footer a:hover {
 
 .messages-table {
     width: 100%;
+    padding: 5px 0;
 }
 
 .messages-table tr td {
@@ -475,7 +497,18 @@ footer a:hover {
 #message-text {
     background: #dedede;
     padding: 10px;
-    margin: 5px 0;
+    margin: 0 auto;
+    width: 80%;
+}
+
+#add-new-item {
+    display: none;
+    width: 75%;
+    margin: 0 auto;
+}
+
+#form-search-checkboxs table tr td {
+    padding: 5px;
 }
 
 
