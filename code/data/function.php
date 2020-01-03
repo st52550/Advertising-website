@@ -251,8 +251,183 @@ function getRegions() {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT name FROM regions";
+    $sql = "SELECT * FROM regions";
     return $conn->query($sql);
+}
+
+function getRegion($id) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT * FROM regions WHERE region_id = $id";
+    return $conn->query($sql);
+}
+
+function getRegionByName($name) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT * FROM regions WHERE name = '$name'";
+    return $conn->query($sql);
+}
+
+function existRegion($region) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $exist = FALSE;
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT region_id FROM regions WHERE name = '$region'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $exist = TRUE;
+        }
+    }
+    return $exist;
+}
+
+function addRegion($region) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "INSERT INTO regions (region_id, name) VALUES (NULL, '$region')";
+    $conn->query($sql);
+}
+
+function editRegion($id, $region) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "UPDATE regions SET name = '$region' WHERE region_id = $id";
+    $conn->query($sql);
+}
+
+function deleteRegion($id) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $success = TRUE;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "DELETE FROM regions WHERE region_id = $id";
+    $conn->query($sql);
+
+    if (mysqli_error($conn)) {
+        $success = FALSE;
+    }
+
+    return $success;
+}
+
+function getCities() {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT city_id, cities.name AS city, regions.name AS region FROM cities
+            JOIN regions ON regions_region_id = region_id";
+    return $conn->query($sql);
+}
+
+function getCity($id) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT city_id, cities.name AS city, regions.name AS region FROM cities
+            JOIN regions ON regions_region_id = region_id
+            WHERE city_id = $id";
+    return $conn->query($sql);
+}
+
+function existCity($city) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $exist = FALSE;
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT city_id FROM cities WHERE name = '$city'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $exist = TRUE;
+        }
+    }
+    return $exist;
+}
+
+function addCity($city, $regionId) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "INSERT INTO cities (city_id, name, regions_region_id) VALUES (NULL, '$city', $regionId)";
+    $conn->query($sql);
+}
+
+function editCity($cityId, $city, $regionId) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "UPDATE cities SET name = '$city', regions_region_id = $regionId WHERE city_id = $cityId";
+    $conn->query($sql);
+}
+
+function deleteCity($id) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $success = TRUE;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "DELETE FROM cities WHERE city_id = $id";
+    $conn->query($sql);
+
+    if (mysqli_error($conn)) {
+        $success = FALSE;
+    }
+
+    return $success;
 }
 
 function getCategories() {
@@ -263,8 +438,82 @@ function getCategories() {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT name FROM categories";
+    $sql = "SELECT * FROM categories";
     return $conn->query($sql);
+}
+
+function getCategory($id) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT * FROM categories WHERE category_id = $id";
+    return $conn->query($sql);
+}
+
+function existCategory($category) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $exist = FALSE;
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT category_id FROM categories WHERE name = '$category'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $exist = TRUE;
+        }
+    }
+    return $exist;
+}
+
+function addCategory($category) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "INSERT INTO categories (category_id, name) VALUES (NULL, '$category')";
+    $conn->query($sql);
+}
+
+function editCategory($id, $category) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "UPDATE categories SET name = '$category' WHERE category_id = $id";
+    $conn->query($sql);
+}
+
+function deleteCategory($id) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $success = TRUE;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "DELETE FROM categories WHERE category_id = $id";
+    $conn->query($sql);
+
+    if (mysqli_error($conn)) {
+        $success = FALSE;
+    }
+
+    return $success;
 }
 
 function getRooms() {
@@ -275,8 +524,82 @@ function getRooms() {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT name FROM rooms";
+    $sql = "SELECT * FROM rooms";
     return $conn->query($sql);
+}
+
+function getRoom($id) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT * FROM rooms WHERE room_id = $id";
+    return $conn->query($sql);
+}
+
+function existRoom($room) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $exist = FALSE;
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT room_id FROM rooms WHERE name = '$room'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $exist = TRUE;
+        }
+    }
+    return $exist;
+}
+
+function addRoom($room) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "INSERT INTO rooms (room_id, name) VALUES (NULL, '$room')";
+    $conn->query($sql);
+}
+
+function editRoom($id, $room) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "UPDATE rooms SET name = '$room' WHERE room_id = $id";
+    $conn->query($sql);
+}
+
+function deleteRoom($id) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $success = TRUE;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "DELETE FROM rooms WHERE room_id = $id";
+    $conn->query($sql);
+
+    if (mysqli_error($conn)) {
+        $success = FALSE;
+    }
+
+    return $success;
 }
 
 function getAllUsersItems() {
@@ -585,6 +908,44 @@ function deleteItem($id) {
     $conn->query($sql2);
 }
 
+function getPicturesById($id) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT * FROM images WHERE image_id = $id";
+
+    return $conn->query($sql);
+}
+
+function getAllPictures() {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT * FROM images";
+
+    return $conn->query($sql);
+}
+
+function editPicture($pictureId, $pictureName, $picturePath) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "UPDATE images SET name = '$pictureName', path = '$picturePath' WHERE image_id = $pictureId";
+
+    return $conn->query($sql);
+}
 
 function deleteImage($imageName) {
     global $dbServername, $dbUsername, $dbPassword, $dbName;

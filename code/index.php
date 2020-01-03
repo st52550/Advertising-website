@@ -103,6 +103,21 @@ include_once './data/function.php';
             case "delete_image" : include './page/delete_image.php'; break;
             case "edit_user" : include './page/edit_user.php'; break;
             case "delete_user" : include './page/delete_user.php'; break;
+            case "add_region" : include './page/add_region.php'; break;
+            case "edit_region" : include './page/edit_region.php'; break;
+            case "delete_region" : include './page/delete_region.php'; break;
+            case "add_city" : include './page/add_city.php'; break;
+            case "edit_city" : include './page/edit_city.php'; break;
+            case "delete_city" : include './page/delete_city.php'; break;
+            case "add_category" : include './page/add_category.php'; break;
+            case "edit_category" : include './page/edit_category.php'; break;
+            case "delete_category" : include './page/delete_category.php'; break;
+            case "add_room" : include './page/add_room.php'; break;
+            case "edit_room" : include './page/edit_room.php'; break;
+            case "delete_room" : include './page/delete_room.php'; break;
+            case "edit_picture" : include './page/edit_picture.php'; break;
+            case "delete_picture" : include './page/delete_picture.php'; break;
+            case "view_picture" : include './page/view_picture.php'; break;
         }
     } else {
         if (basename($_SERVER['PHP_SELF']) == 'index.php') {

@@ -51,7 +51,7 @@ if (isset($_POST["add-new-user"])) {
     <div class="flex-wrap">
         <div class="item-details">
             <button id="new-user" type="button" class="global-button">Nový uživatel</button>
-            <button id="list-users" class="global-button global-button-active">Seznam uživatelů</button>
+            <button id="list-users" type="button" class="global-button global-button-active">Seznam uživatelů</button>
             <br><br>
 
             <div id="list-div">

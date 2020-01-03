@@ -1,7 +1,6 @@
 <?php
 if (isset($_GET["image"])) {
     $imageName = $_GET["image"];
-    echo $imageName;
 
     $id = deleteImage($imageName);
 

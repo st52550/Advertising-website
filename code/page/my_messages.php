@@ -8,15 +8,78 @@ $messagesIds = getMessagesIds($actualUserId);
 $messagesPosition = 1;
 include 'send_message.php';
 ?>
+
+<style media="print">
+    body {
+        background: white;
+    }
+    footer {
+        display: none;
+    }
+    header {
+        display: none;
+    }
+    #nav-section {
+        display: none;
+    }
+    .global-button {
+        display: none;
+    }
+    .pos {
+        display: block !important;
+    }
+    #pos {
+        display: none !important;
+    }
+    .global-button {
+        display: none !important;
+    }
+    .no-print {
+        display: none !important;
+    }
+    .print-header {
+        display: block !important;
+    }
+    #message-text {
+        width: 100%;
+        display: block;
+        text-align: left;
+        background: white;
+    }
+    .messages-table {
+        width: 100%;
+    }
+    .messages-table tr td {
+        background: white;
+        width: 33%;
+    }
+    .messages-table th{
+        width: 42%;
+        background: white;
+        color: #000000;
+        font-weight: bold ;
+    }
+    .item-details{
+        background: white;
+    }
+</style>
+
+
 <div class="full-width-wrapper">
     <div class="flex-wrap">
         <div class="item-details">
             <button id="new" type="button" class="global-button">Nová zpráva</button>
-            <button id="delivered" class="global-button global-button-active">Doručené zprávy</button>
-            <button id="sent" class="global-button">Odeslané zprávy</button>
+            <button id="delivered" type="button" class="global-button global-button-active">Doručené zprávy</button>
+            <button id="sent" type="button" class="global-button">Odeslané zprávy</button>
             <br><br>
         <div id="divs">
             <div id="delivered-messages">
+                <table class='messages-table print-header' style="display: none">
+                    <tr><th>Od</th><th>E-mail</th><th>Datum přijetí</th></tr>
+                </table>
+                <table class='messages-table no-print'>
+                    <tr><th>Od</th><th>E-mail</th><th>Datum přijetí</th><th>Zobrazit/skrýt</th></tr>
+                </table>
                 <?php
                 if ($messagesIds->num_rows > 0) {
                     while ($rowMessageId = $messagesIds->fetch_assoc()) {
@@ -82,6 +145,9 @@ include 'send_message.php';
             </div>
 
             <div id="sent-messages" style="display: none">
+                <table class='messages-table'>
+                    <tr><th>Komu</th><th>E-mail</th><th>Datum přijetí</th><th>Přečteno</th><th>Zobrazit/skrýt</th>
+                </table>
                 <?php
                 $messages = getUserMessages($actualUserId);
                 if ($messages->num_rows > 0) {
@@ -115,7 +181,7 @@ include 'send_message.php';
                         <td><b>$recipientsNames</b></td>
                         <td>$recipientsMails</td>
                         <td>$publicationDate</td>
-                        <td>Přečteno: $readedMessage</td>
+                        <td>$readedMessage</td>
                         <td><button id='pos $messagesPosition' type='button' class='pos global-button' onclick='showHideMessage(this.id)'>Zobrazit/skrýt zprávu</button></td>                        
                         </tr>
                         </table>

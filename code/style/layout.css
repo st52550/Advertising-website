@@ -392,14 +392,15 @@ footer a:hover {
 
 .messages-table {
     width: 100%;
-    padding: 5px 0;
 }
 
 .messages-table tr td {
     width: 20%;
+    padding: 10px;
 }
 
 .messages-table th {
+    width: 20%;
     background: #0d1117;
     border: 1px solid #fcfcfc;
     color: #fcfcfc;
@@ -522,7 +523,5 @@ footer a:hover {
 #form-search-checkboxs table tr td {
     padding: 5px;
 }
-
-
 
 
