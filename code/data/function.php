@@ -4,6 +4,16 @@ $dbUsername = "root";
 $dbPassword = "Database1001";
 $dbName = 'db_dev';
 
+function getConnection() {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    return $conn;
+}
+
 function existUser($email, $username) {
     global $dbServername, $dbUsername, $dbPassword, $dbName;
     $exist = FALSE;
@@ -126,9 +136,9 @@ function getAllItems($type) {
                 JOIN categories ON items.categories_category_id = categories.category_id
                 JOIN cities ON items.cities_city_id = cities.city_id
                 JOIN regions on cities.regions_region_id = region_id
-                JOIN rooms on items.ROOMS_room_id = room_id
+                LEFT JOIN rooms on items.ROOMS_room_id = room_id
                 WHERE type = '$type'
-                ORDER BY modification_date";
+                ORDER BY modification_date DESC";
 
     return $conn->query($sql);
 }
@@ -150,11 +160,11 @@ function getItems($typeValue, $cityValue, $regionValue, $categoryValue, $roomsVa
 
     $sql = "SELECT item_id, publication_date, modification_date, price, area, users.username,categories.name AS category,
         title, items.description, cities.name AS city, regions.name AS region, rooms.name AS room, type FROM items               
-            JOIN users ON items.USERS_user_id=user_id
+            JOIN users ON items.users_user_id=user_id
             JOIN categories ON items.categories_category_id = categories.category_id
             JOIN cities ON items.cities_city_id = cities.city_id
             JOIN regions on cities.regions_region_id = region_id
-            JOIN rooms on items.ROOMS_room_id = room_id
+            LEFT JOIN rooms on items.rooms_room_id = room_id
             WHERE
                 type = '$typeValue'";
             if (!empty($cityValue)) {$sql = $sql."AND cities.name = '$cityValue'";}
@@ -167,7 +177,7 @@ function getItems($typeValue, $cityValue, $regionValue, $categoryValue, $roomsVa
             if (!empty($areaFrom) && empty($areaTo)) {$sql = $sql."AND area >= $areaFrom ";}
             if (empty($areaFrom) && !empty($areaTo)) {$sql = $sql."AND area <= $areaTo ";}
             if (!empty($areaFrom) && !empty($areaTo)) {$sql = $sql."AND (area BETWEEN $areaFrom AND $areaTo)";}
-            $sql = $sql."ORDER BY modification_date";
+            $sql = $sql."ORDER BY modification_date DESC";
     return $conn->query($sql);
 }
 
@@ -185,8 +195,29 @@ function getItem($id) {
                 JOIN categories ON items.categories_category_id = categories.category_id
                 JOIN cities ON items.cities_city_id = cities.city_id
                 JOIN regions on cities.regions_region_id = region_id
-                JOIN rooms on items.ROOMS_room_id = room_id
+                LEFT JOIN rooms on items.ROOMS_room_id = room_id
                 WHERE item_id = $id";
+
+    return $conn->query($sql);
+}
+
+function getItemsByUserId($userId) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT item_id, publication_date, modification_date, price, area, users.username,users.email, categories.name AS category,
+       title, items.description, cities.name AS city, regions.name AS region, rooms.name AS room, type FROM items               
+                JOIN users ON items.USERS_user_id=user_id
+                JOIN categories ON items.categories_category_id = categories.category_id
+                JOIN cities ON items.cities_city_id = cities.city_id
+                JOIN regions on cities.regions_region_id = region_id
+                LEFT JOIN rooms on items.ROOMS_room_id = room_id
+                WHERE users_user_id = $userId
+                ORDER BY modification_date DESC";
 
     return $conn->query($sql);
 }
@@ -291,7 +322,10 @@ function getMessagesIds($userId) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT messages_message_id FROM messages_recipients WHERE users_user_id = $userId";
+    $sql = "SELECT messages_message_id, messages.publication_date FROM messages_recipients 
+            JOIN messages ON messages_message_id = messages.message_id
+            WHERE users_user_id = $userId
+            ORDER BY publication_date DESC";
 
     return $conn->query($sql);
 }
@@ -304,7 +338,7 @@ function getMessages($id) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM messages WHERE message_id = $id ORDER BY publication_date";
+    $sql = "SELECT * FROM messages WHERE message_id = $id ORDER BY publication_date DESC";
 
     return $conn->query($sql);
 }
@@ -317,7 +351,7 @@ function getUserMessages($id) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM messages WHERE USERS_sender_id = $id ORDER BY publication_date";
+    $sql = "SELECT * FROM messages WHERE USERS_sender_id = $id ORDER BY publication_date DESC";
 
     return $conn->query($sql);
 }
@@ -347,7 +381,56 @@ function markReaded($id) {
     }
 
     $sql = "UPDATE messages set readed = 1 where message_id = $id";
-
-    return $conn->query($sql);
+    $conn->query($sql);
 }
 
+function deleteItem($id) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT path FROM images WHERE items_item_id = $id";
+    $images = $conn->query($sql);
+    if ($images->num_rows > 0) {
+        while ($rowImages = $images->fetch_assoc()) {
+            $file = $rowImages["path"];
+            unlink($file);
+        }
+    }
+
+    $sql1 = "DELETE FROM images WHERE items_item_id = $id";
+    $conn->query($sql1);
+
+    $sql2 = "DELETE FROM items WHERE item_id = $id";
+    $conn->query($sql2);
+}
+
+
+function deleteImage($imageName) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT path, items_item_id FROM images WHERE name = '$imageName'";
+    $images = $conn->query($sql);
+
+    $itemId = 0;
+    if ($images->num_rows > 0) {
+        while ($rowImages = $images->fetch_assoc()) {
+            $file = $rowImages["path"];
+            $itemId = $rowImages["items_item_id"];
+            unlink($file);
+        }
+    }
+
+    $sql1 = "DELETE FROM images WHERE name = '$imageName'";
+    $conn->query($sql1);
+
+    return $itemId;
+}
