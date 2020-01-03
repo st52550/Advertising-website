@@ -33,6 +33,119 @@ function existUser($email, $username) {
     return $exist;
 }
 
+function existUsername($username) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $exist = FALSE;
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT user_id FROM users WHERE username = '" . $username . "'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $exist = TRUE;
+        }
+    }
+    return $exist;
+}
+
+function existEmail($email) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $exist = FALSE;
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT user_id FROM users WHERE email = '" . $email . "'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $exist = TRUE;
+        }
+    }
+    return $exist;
+}
+
+function addUser($username, $email, $passwd, $role, $description) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "INSERT INTO users (user_id, role, username, email, password, created, description) VALUES
+            (NULL, '$role', '$username', '$email', '$passwd', NOW(), '$description')";
+    $conn->query($sql);
+}
+
+function editUser($userId, $username, $email, $role, $description) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "UPDATE users SET role = '$role', username = '$username', email = '$email', description = '$description' 
+            WHERE user_id = $userId";
+    $conn->query($sql);
+}
+
+function deleteUser($userId) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT item_id FROM items WHERE users_user_id = $userId";
+    $items = $conn->query($sql);
+    if ($items->num_rows > 0) {
+        while ($rowItem = $items->fetch_assoc()) {
+            $itemId = $rowItem["item_id"];
+
+            $sql1 = "SELECT path FROM images WHERE items_item_id = $itemId";
+            $images = $conn->query($sql1);
+            if ($images->num_rows > 0) {
+                while ($rowImages = $images->fetch_assoc()) {
+                    $file = $rowImages["path"];
+                    unlink($file);
+                }
+            }
+
+            $sql2 = "DELETE FROM images WHERE items_item_id = $itemId";
+            $conn->query($sql2);
+        }
+    }
+
+    $sql3 = "DELETE FROM items WHERE users_user_id = $userId";
+    $conn->query($sql3);
+
+    $sql4 = "DELETE FROM messages_recipients WHERE users_user_id = $userId";
+    $conn->query($sql4);
+
+    $sql5 = "UPDATE messages SET USERS_sender_id = NULL WHERE USERS_sender_id = $userId";
+    $conn->query($sql5);
+
+    $sql6 = "DELETE FROM users WHERE user_id = $userId";
+    $conn->query($sql6);
+}
+
+function getUsers() {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT * FROM users ORDER BY created DESC";
+    return $conn->query($sql);
+}
+
 function getByUserEmail($email) {
     global $dbServername, $dbUsername, $dbPassword, $dbName;
     $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
@@ -64,6 +177,50 @@ function getByUsername($username) {
 
     $sql = "SELECT * FROM users where username = '$username'";
     return $conn->query($sql);
+}
+
+function updateUsername($userId, $username) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "UPDATE users SET username = '$username' WHERE user_id = $userId";
+    $conn->query($sql);
+}
+
+function updateEmail($userId, $email) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "UPDATE users SET email = '$email' WHERE user_id = $userId";
+    $conn->query($sql);
+}
+
+function updatePassword($userId, $password) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "UPDATE users SET password = '$password' WHERE user_id = $userId";
+    $conn->query($sql);
+}
+
+function updateDescription($userId, $description) {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "UPDATE users SET description = '$description' WHERE user_id = $userId";
+    $conn->query($sql);
 }
 
 function getRole($id) {
@@ -119,6 +276,26 @@ function getRooms() {
     }
 
     $sql = "SELECT name FROM rooms";
+    return $conn->query($sql);
+}
+
+function getAllUsersItems() {
+    global $dbServername, $dbUsername, $dbPassword, $dbName;
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT item_id, publication_date, modification_date, price, area, users.username,categories.name AS category,
+       title, items.description, cities.name AS city, regions.name AS region, rooms.name AS room, type FROM items
+                JOIN users ON items.USERS_user_id=user_id
+                JOIN categories ON items.categories_category_id = categories.category_id
+                JOIN cities ON items.cities_city_id = cities.city_id
+                JOIN regions on cities.regions_region_id = region_id
+                LEFT JOIN rooms on items.ROOMS_room_id = room_id
+                ORDER BY publication_date DESC";
+
     return $conn->query($sql);
 }
 

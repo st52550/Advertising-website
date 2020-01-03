@@ -25,8 +25,10 @@ if (isset($_GET["item"])) {
     $pictures = getPictures($idItem);
 
     $actualUserMail = '';
+    $role = '';
     if (isset($_SESSION["user_email"])) {
         $actualUserMail = $_SESSION["user_email"];
+        $role = getRole($_SESSION["user_id"]);
     }
 }
 ?>
@@ -133,6 +135,14 @@ if (isset($_GET["item"])) {
                         </form>
                     </div>
                     ";
+                    if ($role == 'admin') {
+                        echo " 
+                        <br><br><div>    
+                        <a class=\"information-link\" href=\"?page=edit_ad&item=$idItem\">Upravit</a>
+                        <a class=\"information-link\" href=\"?page=delete_ad&item=$idItem\" onclick=\"return confirm('Opravdu chcete inzerát smazat?')\">Odstranit</a>
+                        </div>
+                        ";
+                    }
                 } else {
                     echo " 
                     <br><br><div>    

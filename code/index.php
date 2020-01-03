@@ -101,6 +101,8 @@ include_once './data/function.php';
             case "delete_ad" : include './page/delete_ad.php'; break;
             case "edit_ad" : include './page/edit_ad.php'; break;
             case "delete_image" : include './page/delete_image.php'; break;
+            case "edit_user" : include './page/edit_user.php'; break;
+            case "delete_user" : include './page/delete_user.php'; break;
         }
     } else {
         if (basename($_SERVER['PHP_SELF']) == 'index.php') {
