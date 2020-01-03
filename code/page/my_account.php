@@ -128,7 +128,7 @@ if (isset($_POST["change-description"])) {
     <div class="flex-wrap">
         <div class="item-details">
             <button id="edit-profile" type="button" class="global-button">Upravit údaje</button>
-            <button id="profile-info" class="global-button global-button-active">Informace</button>
+            <button id="profile-info" type="button" class="global-button global-button-active">Informace</button>
             <br><br>
 
             <div id="info-div">

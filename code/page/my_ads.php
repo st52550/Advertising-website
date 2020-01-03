@@ -11,7 +11,7 @@ $userItems = getItemsByUserId($actualUserId);
     <div class="flex-wrap">
         <div class="item-details">
             <button id="new-item" type="button" class="global-button">Nový inzerát</button>
-            <button id="user-items" class="global-button global-button-active">Moje inzeráty</button>
+            <button id="user-items" type="button" class="global-button global-button-active">Moje inzeráty</button>
             <br><br>
 
             <div id="user-items-list">
