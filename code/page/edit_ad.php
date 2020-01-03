@@ -102,6 +102,8 @@ if (isset($_GET["item"])) {
                 $conn->query($sql6);
             }
         }
+
+        header("Refresh:0; url=?page=details&item=$itemId");
     }
 }
 ?>

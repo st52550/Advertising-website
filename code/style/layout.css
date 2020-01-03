@@ -376,13 +376,18 @@ footer a:hover {
 }
 
 .item-details table {
-    border-collapse: separate;
+    border-collapse: collapse;
     border-spacing: 30px 0;
     margin: 0 auto;
 }
 
 .item-details table tr {
     text-align: left;
+}
+
+.item-details table td {
+    text-align: left;
+    padding: 1px 10px;
 }
 
 .messages-table {
@@ -392,6 +397,13 @@ footer a:hover {
 
 .messages-table tr td {
     width: 20%;
+}
+
+.messages-table th {
+    background: #0d1117;
+    border: 1px solid #fcfcfc;
+    color: #fcfcfc;
+    padding: 10px;
 }
 
 .item-description {
