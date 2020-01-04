@@ -3,9 +3,10 @@
 -- Model: New Model    Version: 1.0
 -- MySQL Workbench Forward Engineering
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+SET @OLD_UNIQUE_CHECKS = @@UNIQUE_CHECKS, UNIQUE_CHECKS = 0;
+SET @OLD_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS = 0;
+SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE =
+        'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
 -- Schema db_dev
@@ -14,206 +15,283 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema db_dev
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `db_dev` ;
-USE `db_dev` ;
+CREATE SCHEMA IF NOT EXISTS `db_dev`;
+USE `db_dev`;
 
 -- -----------------------------------------------------
 -- Table `db_dev`.`users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_dev`.`users` (
-                                                `user_id` INT(6) NOT NULL AUTO_INCREMENT,
-                                                `username` VARCHAR(45) NOT NULL,
-                                                `password` VARCHAR(45) NOT NULL,
-                                                `email` VARCHAR(45) NOT NULL,
-                                                `created` DATETIME NOT NULL,
-                                                `description` TEXT NOT NULL,
-                                                `role` VARCHAR(15) NOT NULL,
-                                                PRIMARY KEY (`user_id`))
+CREATE TABLE IF NOT EXISTS `db_dev`.`users`
+(
+    `user_id`     INT(6)      NOT NULL AUTO_INCREMENT,
+    `username`    VARCHAR(45) NOT NULL,
+    `password`    VARCHAR(45) NOT NULL,
+    `email`       VARCHAR(45) NOT NULL,
+    `created`     DATETIME    NOT NULL,
+    `description` TEXT        NOT NULL,
+    `role`        VARCHAR(15) NOT NULL,
+    PRIMARY KEY (`user_id`)
+)
     ENGINE = InnoDB;
 
-INSERT INTO `users` (`user_id`, `role`, `username`, `email`, `password`, `created`, `description`) VALUES
-(NULL, 'admin', 'admin', 'admin@admin.cz', '21232f297a57a5a743894a0e4a801fc3', '2019-12-28 11-59-36', 'administrátor webu'),
-(NULL, 'spravce', 'spravce', 'spravce@spravce.cz', '192a2929e714275bee587d280d596eeb', '2019-12-28 11-59-40', 'správce webu'),
-(NULL, 'inzerent', 'prvni', 'prvni@gmail.com', '3926efd781f7d330f3779b43426d2cf7', '2019-12-28 11-59-45', 'popis uživatele');
+INSERT INTO `users` (`user_id`, `role`, `username`, `email`, `password`, `created`, `description`)
+VALUES (NULL, 'admin', 'admin', 'admin@admin.cz', '21232f297a57a5a743894a0e4a801fc3', '2019-12-28 11-59-36',
+        'administrátor webu'),
+       (NULL, 'spravce', 'spravce', 'spravce@spravce.cz', '192a2929e714275bee587d280d596eeb', '2019-12-28 11-59-40',
+        'správce webu'),
+       (NULL, 'inzerent', 'prvni', 'prvni@gmail.com', '3926efd781f7d330f3779b43426d2cf7', '2019-12-28 11-59-45',
+        'popis uživatele');
 -- -----------------------------------------------------
 -- Table `db_dev`.`categories`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_dev`.`categories` (
-                                                     `category_id` INT(2) NOT NULL AUTO_INCREMENT,
-                                                     `name` VARCHAR(50) NOT NULL,
-                                                     PRIMARY KEY (`category_id`))
+CREATE TABLE IF NOT EXISTS `db_dev`.`categories`
+(
+    `category_id` INT(2)      NOT NULL AUTO_INCREMENT,
+    `name`        VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`category_id`)
+)
     ENGINE = InnoDB;
 
-INSERT INTO `categories` (`category_id`, `name`) VALUES
-(NULL, 'Byt'),
-(NULL, 'Dům'),
-(NULL, 'Pozemek');
+INSERT INTO `categories` (`category_id`, `name`)
+VALUES (NULL, 'Byt'),
+       (NULL, 'Dům'),
+       (NULL, 'Pozemek');
 -- -----------------------------------------------------
 -- Table `db_dev`.`regions`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_dev`.`regions` (
-                                                  `region_id` INT(2) NOT NULL AUTO_INCREMENT,
-                                                  `name` VARCHAR(75) NOT NULL,
-                                                  PRIMARY KEY (`region_id`))
+CREATE TABLE IF NOT EXISTS `db_dev`.`regions`
+(
+    `region_id` INT(2)      NOT NULL AUTO_INCREMENT,
+    `name`      VARCHAR(75) NOT NULL,
+    PRIMARY KEY (`region_id`)
+)
     ENGINE = InnoDB;
 
-INSERT INTO `regions` (`region_id`, `name`) VALUES
-(NULL, 'Celá ČR'),
-(NULL, 'Pardubický kraj'),
-(NULL, 'Liberecký kraj');
+INSERT INTO `regions` (`region_id`, `name`)
+VALUES (NULL, 'Celá ČR'),
+       (NULL, 'Pardubický kraj'),
+       (NULL, 'Liberecký kraj');
 -- -----------------------------------------------------
 -- Table `db_dev`.`rooms`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_dev`.`rooms` (
-                                                `room_id` INT(2) NOT NULL AUTO_INCREMENT,
-                                                `name` VARCHAR(10) NOT NULL,
-                                                PRIMARY KEY (`room_id`))
+CREATE TABLE IF NOT EXISTS `db_dev`.`rooms`
+(
+    `room_id` INT(2)      NOT NULL AUTO_INCREMENT,
+    `name`    VARCHAR(10) NOT NULL,
+    PRIMARY KEY (`room_id`)
+)
     ENGINE = InnoDB;
 
-INSERT INTO `rooms` (`room_id`, `name`) VALUES
-(NULL, '1+kk'),
-(NULL, '1+1'),
-(NULL, '2+kk'),
-(NULL, '2+1'),
-(NULL, '3+kk'),
-(NULL, '3+1');
+INSERT INTO `rooms` (`room_id`, `name`)
+VALUES (NULL, '1+kk'),
+       (NULL, '1+1'),
+       (NULL, '2+kk'),
+       (NULL, '2+1'),
+       (NULL, '3+kk'),
+       (NULL, '3+1');
 -- -----------------------------------------------------
 -- Table `db_dev`.`items`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_dev`.`items` (
-                                                `item_id` INT(5) NOT NULL AUTO_INCREMENT,
-                                                `publication_date` DATETIME NOT NULL,
-                                                `modification_date` DATETIME NULL,
-                                                `price` INT(7) NOT NULL,
-                                                `users_user_id` INT(6) NOT NULL,
-                                                `categories_category_id` INT(2) NOT NULL,
-                                                `title` VARCHAR(45) NOT NULL,
-                                                `description` TEXT NOT NULL,
-                                                `rooms_room_id` INT(2) NOT NULL,
-                                                `cities_city_id` INT NOT NULL,
-                                                `type` VARCHAR(45) NOT NULL,
-                                                PRIMARY KEY (`item_id`),
-                                                INDEX `fk_ITEM_USERS1_idx` (`users_user_id` ASC),
-                                                INDEX `fk_ITEM_CATEGORY1_idx` (`categories_category_id` ASC),
-                                                INDEX `fk_ITEMS_ROOMS1_idx` (`rooms_room_id` ASC),
-                                                INDEX `fk_items_cities1_idx` (`cities_city_id` ASC),
-                                                CONSTRAINT `fk_ITEM_USERS1`
-                                                    FOREIGN KEY (`users_user_id`)
-                                                        REFERENCES `db_dev`.`users` (`user_id`)
-                                                        ON DELETE NO ACTION
-                                                        ON UPDATE NO ACTION,
-                                                CONSTRAINT `fk_ITEM_CATEGORY1`
-                                                    FOREIGN KEY (`categories_category_id`)
-                                                        REFERENCES `db_dev`.`categories` (`category_id`)
-                                                        ON DELETE NO ACTION
-                                                        ON UPDATE NO ACTION,
-                                                CONSTRAINT `fk_ITEMS_ROOMS1`
-                                                    FOREIGN KEY (`rooms_room_id`)
-                                                        REFERENCES `db_dev`.`rooms` (`room_id`)
-                                                        ON DELETE NO ACTION
-                                                        ON UPDATE NO ACTION,
-                                                CONSTRAINT `fk_items_cities1`
-                                                    FOREIGN KEY (`cities_city_id`)
-                                                        REFERENCES `db_dev`.`cities` (`city_id`)
-                                                        ON DELETE NO ACTION
-                                                        ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `db_dev`.`items`
+(
+    `item_id`                INT(5)      NOT NULL AUTO_INCREMENT,
+    `publication_date`       DATETIME    NOT NULL,
+    `modification_date`      DATETIME    NULL,
+    `price`                  INT(7)      NOT NULL,
+    `area`                   INT(6)      NOT NULL,
+    `users_user_id`          INT(6)      NOT NULL,
+    `categories_category_id` INT(2)      NOT NULL,
+    `title`                  VARCHAR(45) NOT NULL,
+    `description`            TEXT        NOT NULL,
+    `rooms_room_id`          INT(2)      NOT NULL,
+    `cities_city_id`         INT         NOT NULL,
+    `type`                   VARCHAR(45) NOT NULL,
+    PRIMARY KEY (`item_id`),
+    INDEX `fk_ITEM_USERS1_idx` (`users_user_id` ASC),
+    INDEX `fk_ITEM_CATEGORY1_idx` (`categories_category_id` ASC),
+    INDEX `fk_ITEMS_ROOMS1_idx` (`rooms_room_id` ASC),
+    INDEX `fk_items_cities1_idx` (`cities_city_id` ASC),
+    CONSTRAINT `fk_ITEM_USERS1`
+        FOREIGN KEY (`users_user_id`)
+            REFERENCES `db_dev`.`users` (`user_id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION,
+    CONSTRAINT `fk_ITEM_CATEGORY1`
+        FOREIGN KEY (`categories_category_id`)
+            REFERENCES `db_dev`.`categories` (`category_id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION,
+    CONSTRAINT `fk_ITEMS_ROOMS1`
+        FOREIGN KEY (`rooms_room_id`)
+            REFERENCES `db_dev`.`rooms` (`room_id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION,
+    CONSTRAINT `fk_items_cities1`
+        FOREIGN KEY (`cities_city_id`)
+            REFERENCES `db_dev`.`cities` (`city_id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION
+)
     ENGINE = InnoDB;
 
-INSERT INTO `items` (`item_id`, `publication_date`, `price`, `users_user_id`, `categories_category_id`,
-                     `title`, `description`, `cities_city_id`, `rooms_room_id`, `type`) VALUES
-(NULL, '2019-12-29 21-03-21', 13500, 1, 1, 'Pronájem luxusního bytu', 'Jedná se o...', 1, 4, 'Pronájem');
+INSERT INTO `items` (`item_id`, `publication_date`, `modification_date`, `price`, `users_user_id`,
+                     `categories_category_id`,
+                     `title`, `description`, `cities_city_id`, `rooms_room_id`, `type`, `area`)
+VALUES (NULL, '2019-12-29 21-03-21', '2019-12-29 22-45-36', 13500, 1, 1, 'Pronájem luxusního bytu', 'Jedná se o...', 1,
+        4, 'Pronájem', 74);
+
+INSERT INTO `items` (`item_id`, `publication_date`, `modification_date`, `price`, `users_user_id`,
+                     `categories_category_id`,
+                     `title`, `description`, `cities_city_id`, `rooms_room_id`, `type`, `area`)
+VALUES (NULL, '2019-12-30 13-25-21', '2019-12-30 13-25-21', 3500000, 1, 2, 'Prodej domu', 'Jedná se o...', 2, 6,
+        'Prodej', 240);
 -- -----------------------------------------------------
 -- Table `db_dev`.`messages`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_dev`.`messages` (
-                                                   `message_id` INT(6) NOT NULL AUTO_INCREMENT,
-                                                   `message` TEXT NOT NULL,
-                                                   `publication_date` DATETIME NOT NULL,
-                                                   `USERS_sender_id` INT(6) NOT NULL,
-                                                   PRIMARY KEY (`message_id`),
-                                                   INDEX `fk_ITEM_COMMENT_USERS1_idx` (`USERS_sender_id` ASC),
-                                                   CONSTRAINT `fk_ITEM_COMMENT_USERS1`
-                                                       FOREIGN KEY (`USERS_sender_id`)
-                                                           REFERENCES `db_dev`.`users` (`user_id`)
-                                                           ON DELETE NO ACTION
-                                                           ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `db_dev`.`messages`
+(
+    `message_id`       INT(6)       NOT NULL AUTO_INCREMENT,
+    `message`          TEXT         NOT NULL,
+    `publication_date` DATETIME     NOT NULL,
+    `USERS_sender_id`  INT(6)       NULL,
+    `sender_name`      VARCHAR(45)  NOT NULL,
+    `sender_email`     VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`message_id`),
+    INDEX `fk_ITEM_COMMENT_USERS1_idx` (`USERS_sender_id` ASC),
+    CONSTRAINT `fk_ITEM_COMMENT_USERS1`
+        FOREIGN KEY (`USERS_sender_id`)
+            REFERENCES `db_dev`.`users` (`user_id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION
+)
     ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `db_dev`.`messages_recipients`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_dev`.`messages_recipients` (
-                                                              `messages_message_id` INT(6) NOT NULL AUTO_INCREMENT,
-                                                              `users_user_id` INT(6) NOT NULL,
-                                                              PRIMARY KEY (`messages_message_id`, `users_user_id`),
-                                                              INDEX `fk_messages_has_users_users1_idx` (`users_user_id` ASC),
-                                                              INDEX `fk_messages_has_users_messages1_idx` (`messages_message_id` ASC),
-                                                              CONSTRAINT `fk_messages_has_users_messages1`
-                                                                  FOREIGN KEY (`messages_message_id`)
-                                                                      REFERENCES `db_dev`.`messages` (`message_id`)
-                                                                      ON DELETE NO ACTION
-                                                                      ON UPDATE NO ACTION,
-                                                              CONSTRAINT `fk_messages_has_users_users1`
-                                                                  FOREIGN KEY (`users_user_id`)
-                                                                      REFERENCES `db_dev`.`users` (`user_id`)
-                                                                      ON DELETE NO ACTION
-                                                                      ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `db_dev`.`messages_recipients`
+(
+    `messages_message_id` INT(6) NOT NULL AUTO_INCREMENT,
+    `users_user_id`       INT(6) NOT NULL,
+    PRIMARY KEY (`messages_message_id`, `users_user_id`),
+    INDEX `fk_messages_has_users_users1_idx` (`users_user_id` ASC),
+    INDEX `fk_messages_has_users_messages1_idx` (`messages_message_id` ASC),
+    CONSTRAINT `fk_messages_has_users_messages1`
+        FOREIGN KEY (`messages_message_id`)
+            REFERENCES `db_dev`.`messages` (`message_id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION,
+    CONSTRAINT `fk_messages_has_users_users1`
+        FOREIGN KEY (`users_user_id`)
+            REFERENCES `db_dev`.`users` (`user_id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION
+)
     ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `db_dev`.`cities`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_dev`.`cities` (
-                                                 `city_id` INT NOT NULL AUTO_INCREMENT,
-                                                 `name` VARCHAR(45) NOT NULL,
-                                                 `regions_region_id` INT NOT NULL,
-                                                 PRIMARY KEY (`city_id`),
-                                                 INDEX `fk_cities_regions1_idx` (`regions_region_id` ASC),
-                                                 CONSTRAINT `fk_cities_regions1`
-                                                     FOREIGN KEY (`regions_region_id`)
-                                                         REFERENCES `db_dev`.`regions` (`region_id`)
-                                                         ON DELETE NO ACTION
-                                                         ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `db_dev`.`cities`
+(
+    `city_id`           INT         NOT NULL AUTO_INCREMENT,
+    `name`              VARCHAR(45) NOT NULL,
+    `regions_region_id` INT         NOT NULL,
+    PRIMARY KEY (`city_id`),
+    INDEX `fk_cities_regions1_idx` (`regions_region_id` ASC),
+    CONSTRAINT `fk_cities_regions1`
+        FOREIGN KEY (`regions_region_id`)
+            REFERENCES `db_dev`.`regions` (`region_id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION
+)
     ENGINE = InnoDB;
 
-INSERT INTO `cities` (`city_id`, `name`, `regions_region_id`) VALUES
-(NULL, 'Pardubice', 2),
-(NULL, 'Chrudim', 2),
-(NULL, 'Svitavy', 2);
+INSERT INTO `cities` (`city_id`, `name`, `regions_region_id`)
+VALUES (NULL, 'Pardubice', 2),
+       (NULL, 'Chrudim', 2),
+       (NULL, 'Svitavy', 2);
 
 -- -----------------------------------------------------
 -- Table `db_dev`.`images`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_dev`.`images` (
-                                                 `image_id` INT NOT NULL AUTO_INCREMENT,
-                                                 `name` VARCHAR(75) NOT NULL,
-                                                 `path` VARCHAR(256) NOT NULL,
-                                                 `items_item_id` INT(5) NOT NULL,
-                                                 PRIMARY KEY (`image_id`),
-                                                 INDEX `fk_images_items1_idx` (`items_item_id` ASC),
-                                                 CONSTRAINT `fk_images_items1`
-                                                     FOREIGN KEY (`items_item_id`)
-                                                         REFERENCES `db_dev`.`items` (`item_id`)
-                                                         ON DELETE NO ACTION
-                                                         ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `db_dev`.`images`
+(
+    `image_id`      INT          NOT NULL AUTO_INCREMENT,
+    `name`          VARCHAR(75)  NOT NULL,
+    `path`          VARCHAR(256) NOT NULL,
+    `items_item_id` INT(5)       NOT NULL,
+    PRIMARY KEY (`image_id`),
+    INDEX `fk_images_items1_idx` (`items_item_id` ASC),
+    CONSTRAINT `fk_images_items1`
+        FOREIGN KEY (`items_item_id`)
+            REFERENCES `db_dev`.`items` (`item_id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION
+)
     ENGINE = InnoDB;
 
-INSERT INTO `images` (`image_id`, `name`, `path`, `items_item_id`) VALUES
-(NULL, 'no-image.PNG', '../pics/no-image.PNG', 1);
+INSERT INTO `images` (`image_id`, `name`, `path`, `items_item_id`)
+VALUES (NULL, 'no-image.PNG', './pics/no-image.PNG', 1);
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+INSERT INTO `images` (`image_id`, `name`, `path`, `items_item_id`)
+VALUES (NULL, 'id-1-bathroom.jpg', './pics/id-1-bathroom.jpg', 1),
+       (NULL, 'id-1-living-room.jpg', './pics/id-1-living-room.jpg', 1);
 
-SELECT * FROM users;
 
-SELECT name FROM regions;
+SET SQL_MODE = @OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS;
 
-SELECT item_id, publication_date, price, users.username,categories.name AS category,
-       title, items.description, cities.name AS city, regions.name AS region, rooms.name AS room, type FROM items
-                JOIN users ON items.USERS_user_id=user_id
-                JOIN categories ON items.categories_category_id = categories.category_id
-                JOIN cities ON items.cities_city_id = cities.city_id
-                JOIN regions on cities.regions_region_id = region_id
-                JOIN rooms on items.ROOMS_room_id = room_id
+SELECT *
+FROM users;
+
+SELECT name
+FROM regions;
+
+SELECT item_id,
+       publication_date,
+       price,
+       area,
+       users.username,
+       categories.name AS category,
+       title,
+       items.description,
+       cities.name     AS city,
+       regions.name    AS region,
+       rooms.name      AS room,
+       type
+FROM items
+         JOIN users ON items.USERS_user_id = user_id
+         JOIN categories ON items.categories_category_id = categories.category_id
+         JOIN cities ON items.cities_city_id = cities.city_id
+         JOIN regions on cities.regions_region_id = region_id
+         JOIN rooms on items.ROOMS_room_id = room_id
 ORDER BY publication_date;
+
+SELECT *
+FROM images
+WHERE items_item_id = 1;
+
+SELECT item_id,
+       publication_date,
+       modification_date,
+       price,
+       area,
+       users.username,
+       categories.name AS category,
+       title,
+       items.description,
+       cities.name     AS city,
+       regions.name    AS region,
+       rooms.name      AS room,
+       type
+FROM items
+         JOIN users ON items.USERS_user_id = user_id
+         JOIN categories ON items.categories_category_id = categories.category_id
+         JOIN cities ON items.cities_city_id = cities.city_id
+         JOIN regions on cities.regions_region_id = region_id
+         JOIN rooms on items.ROOMS_room_id = room_id
+WHERE (rooms.name IN ('2+kk', '2+1', '3+kk', '3+1'))
+ORDER BY modification_date;
+

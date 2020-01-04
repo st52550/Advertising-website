@@ -74,12 +74,16 @@ include 'send_message.php';
             <br><br>
         <div id="divs">
             <div id="delivered-messages">
-                <table class='messages-table print-header' style="display: none">
-                    <tr><th>Od</th><th>E-mail</th><th>Datum přijetí</th></tr>
-                </table>
+                <div style="overflow-x:auto;">
+                    <table class='messages-table print-header' style="display: none">
+                        <tr><th>Od</th><th>E-mail</th><th>Datum přijetí</th></tr>
+                    </table>
+                </div>
+                <div style="overflow-x:auto;">
                 <table class='messages-table no-print'>
                     <tr><th>Od</th><th>E-mail</th><th>Datum přijetí</th><th>Zobrazit/skrýt</th></tr>
                 </table>
+                </div>
                 <?php
                 if ($messagesIds->num_rows > 0) {
                     while ($rowMessageId = $messagesIds->fetch_assoc()) {
@@ -96,14 +100,16 @@ include 'send_message.php';
                                 $readed = $rowMessage["readed"];
 
                                 echo "
-                                <table class='messages-table'>
-                                <tr>
-                                <td><b>$senderName</b></td>
-                                <td>$senderEmail</td>
-                                <td>$publicationDate</td>
-                                <td><button id='pos $messagesPosition' type='button' class='pos global-button' onclick='showHideMessage(this.id)'>Zobrazit/skrýt zprávu</button></td>                           
-                                </tr>
-                                </table>
+                                <div style=\"overflow-x:auto;\">
+                                    <table class='messages-table'>
+                                    <tr>
+                                    <td><b>$senderName</b></td>
+                                    <td>$senderEmail</td>
+                                    <td>$publicationDate</td>
+                                    <td><button id='pos $messagesPosition' type='button' class='pos global-button' onclick='showHideMessage(this.id)'>Zobrazit/skrýt zprávu</button></td>                           
+                                    </tr>
+                                    </table>
+                                </div>
                                 ";
 
                                 if ($readed == 0) {
@@ -145,9 +151,11 @@ include 'send_message.php';
             </div>
 
             <div id="sent-messages" style="display: none">
-                <table class='messages-table'>
-                    <tr><th>Komu</th><th>E-mail</th><th>Datum přijetí</th><th>Přečteno</th><th>Zobrazit/skrýt</th>
-                </table>
+                <div style="overflow-x:auto;">
+                    <table class='messages-table'>
+                        <tr><th>Komu</th><th>E-mail</th><th>Datum přijetí</th><th>Přečteno</th><th>Zobrazit/skrýt</th>
+                    </table>
+                </div>
                 <?php
                 $messages = getUserMessages($actualUserId);
                 if ($messages->num_rows > 0) {
@@ -176,16 +184,17 @@ include 'send_message.php';
                         }
 
                         echo "
-                        <table class='messages-table'>
-                        <tr>
-                        <td><b>$recipientsNames</b></td>
-                        <td>$recipientsMails</td>
-                        <td>$publicationDate</td>
-                        <td>$readedMessage</td>
-                        <td><button id='pos $messagesPosition' type='button' class='pos global-button' onclick='showHideMessage(this.id)'>Zobrazit/skrýt zprávu</button></td>                        
-                        </tr>
-                        </table>
-                        
+                        <div style=\"overflow-x:auto;\">
+                            <table class='messages-table'>
+                            <tr>
+                            <td><b>$recipientsNames</b></td>
+                            <td>$recipientsMails</td>
+                            <td>$publicationDate</td>
+                            <td>$readedMessage</td>
+                            <td><button id='pos $messagesPosition' type='button' class='pos global-button' onclick='showHideMessage(this.id)'>Zobrazit/skrýt zprávu</button></td>                        
+                            </tr>
+                            </table>
+                        </div>
                         <div class='pos $messagesPosition' style='display: none'>
                             <div id='message-text'>
                                 $message;
