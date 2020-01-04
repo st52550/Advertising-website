@@ -1,4 +1,17 @@
 <?php
+if (isset($_GET["refuse"])){
+    echo ("
+            <div class=\"full-width-wrapper\">
+                <div class=\"flex-wrap\">
+                    <div class=\"login-register-form-alert\">
+                        <p>Pro vložení inzerátu se musíte přihlásit</p> 
+                        <p>Nemáte účet? <a class='information-link' href='?page=register'>Registrace</a></p>
+                    </div>   
+                </div>
+            </div>   
+            ");
+}
+
 if (isset($_POST["login"])) {
     $name = $_POST["username"];
     $passwd = md5($_POST["password"]);
