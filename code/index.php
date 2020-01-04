@@ -19,6 +19,9 @@ include_once './data/function.php';
 </head>
 
 <body>
+    <div class="warning">
+        Jedná se o školní projekt, nikoli o plnohodnotnou inzerci!
+    </div>
     <header>
             <div id="header-title">
                 <a href="./index.php"><img id="header-logo" src="./img/logo.png" width="100" height="100" alt="Logo"></a>
@@ -53,7 +56,8 @@ include_once './data/function.php';
                     echo ("<button id=\"manage-data\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=manage_data'\">Správa dat</button>");
                 }
             } else {
-                echo ("<button id=\"ads\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=ads'\">Inzeráty</button>");
+                echo ("<button id=\"ads\" type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=ads'\">Inzeráty</button>
+                       <button type=\"button\" class=\"nav-section-button\" onclick=\"location.href='?page=login&refuse'\">Vložit inzerát</button>");
             }
             ?>
         </nav>
