@@ -9,19 +9,27 @@ body {
     font-family: 'Roboto', sans-serif;
     position: relative;
     margin: 0;
-    min-height: 100%;
+}
+
+section {
+    display: block;
+    float: left;
+    width: 100%;
 }
 
 header {
     top: 0;
+    left: 0;
+    right: 0;
     width: 100%;
-    height: 100px;
+    min-height: 100px;
     display: flex;
+    justify-content: space-around;
     background-color: #84B3E7;
+    float: left;
 }
 
 #header-logo {
-    width: 120px;
     float: left;
     margin: 5px 20px 0 0;
 }
@@ -58,7 +66,7 @@ header {
 #nav-section {
     top: 0;
     width: 100%;
-    height: 50px;
+    height: auto;
     background-color: #0d1117;
 }
 
@@ -103,7 +111,6 @@ header {
     text-align: center;
 }
 
-/* The navigation menu links */
 #sidenav a {
     padding: 6px 8px;
     text-decoration: none;
@@ -111,7 +118,6 @@ header {
     display: block;
 }
 
-/* When you mouse over the navigation links, change their color */
 #sidenav a:hover {
     color: #0d1117;
 }
@@ -121,14 +127,8 @@ header {
     padding: 10px;
 }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-    #sidenav {padding-top: 15px;}
-    #sidenav a {font-size: 18px;}
-}
-
-.full-width-wrapper, main {
-    width: 960px;
+.full-width-wrapper {
+    max-width: 960px !important;
     margin: 0 auto;
     position: relative;
 }
@@ -137,13 +137,15 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    width: 100%;
+    float: right;
+    position: relative;
 }
 
 footer {
     bottom: 0;
     top:0;
     left:0;
-    min-height: 200px;
     background-color: #0d1117;
     color: #fcfcfc;
     float:left;
@@ -308,21 +310,28 @@ footer a:hover {
 .item-row {
     background: #eeeeee;
     width: 100%;
-    height: 220px;
-    padding: 5px 15px 15px 15px;
+    height: 230px;
     margin-bottom: 10px;
 }
 
 .user-item-row {
     background: #fcfcfc;
-    width: 95%;
-    height: 220px;
+    width: 100%;
+    height: 230px;
     text-align: left;
-    padding: 5px 15px 15px 15px;
     margin: 0 auto 10px;
+    float: left;
+}
+
+.export-xml {
+    text-align: center;
+    float: left;
+    margin-bottom: 10px;
+    width: 100%
 }
 
 .information {
+    padding-left: 10px;
     float: left;
 }
 
@@ -333,8 +342,8 @@ footer a:hover {
 }
 
 .item-date {
+    float: left;
     padding: 5px;
-    margin-left: -15px;
     background: #f69999;
 }
 
@@ -344,6 +353,10 @@ footer a:hover {
     background: #dedede;
     padding: 5px;
     margin-left: 5px;
+}
+
+.default {
+    float: none !important;
 }
 
 .information-link:hover {
@@ -369,6 +382,7 @@ footer a:hover {
 
 .item-details {
     width: 100%;
+    position: relative;
     padding: 20px;
     margin: 20px 0;
     background: #eee;
@@ -392,6 +406,7 @@ footer a:hover {
 
 .messages-table {
     width: 100%;
+    min-width: 500px;
 }
 
 .messages-table tr td {
@@ -524,4 +539,97 @@ footer a:hover {
     padding: 5px;
 }
 
+/* Responsive */
+@media (max-width: 960px) {
+    #sidenav {
+        width: 100%;
+        margin-bottom: 10px;
+        position: relative;
+        float: left;
+        padding: 0;
+    }
+    #items {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0;
+    }
+    .item-row {
+        float: left;
+        padding: 0;
+    }
+    .item-date {
+       margin: 0;
+        float: left;
+    }
+    .information {
+        width: 50%;
+        padding: 0;
+        text-align: center;
+    }
+    .information-link {
+        float: right;
+    }
+    .user-item-row {
+        height: 255px;
+    }
+    .export-xml {
+        text-align: center;
+    }
+}
 
+@media (max-width: 730px) {
+    .item-row {
+        height: 250px;
+    }
+}
+
+@media (max-width: 630px) {
+    header {
+        flex-wrap: wrap;
+    }
+    .image-container{
+        display: none;
+    }
+    .information {
+        width: 100%;
+    }
+    .item-details {
+        padding: 0;
+    }
+    .information-link {
+        width: 100%;
+        margin: 5px 0 auto;
+        float: left;
+        padding: 5px 0;
+    }
+    .user-item-row {
+        height: 325px;
+    }
+    .item-row {
+        height: 260px;
+    }
+}
+
+@media (max-width: 530px) {
+    #nav-section nav{
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 430px) {
+    header {
+        text-align: center;
+    }
+    #header-logo {
+        margin: 0 auto;
+        float: none;
+    }
+    #header-title {
+        line-height: 40px;
+        float: none;
+    }
+    #form-checkbox-label {
+        white-space: normal;
+    }
+
+}

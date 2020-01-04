@@ -59,7 +59,7 @@ if ($items->num_rows > 0) {
                 echo "<span>Prodej: <b>$price Kč</b></span>";
             }
             echo "
-                &rarr; <a class=\"information-link\" href=\"?page=details&item=$itemId\">Zobrazit detaily</a>
+                &rarr; <a class=\"information-link\" href=\"?page=details&item=$itemId\">Zobrazit&nbsp;detaily</a>
             </div>
             ";
             if ($pictures->num_rows > 0) {

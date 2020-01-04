@@ -55,6 +55,7 @@ if (isset($_POST["add-new-user"])) {
             <br><br>
 
             <div id="list-div">
+                <div style="overflow-x:auto;">
                 <table class='messages-table'>
                     <tr><th>Uživatelské jméno</th><th>E-mail</th><th>Role</th><th>Datum registrace</th>
                         <th>Editovat</th><th>Odstranit</th></tr>
@@ -79,6 +80,7 @@ if (isset($_POST["add-new-user"])) {
                     }
                     ?>
                 </table>
+                </div>
             </div>
 
             <div id="new-user-div" style="display: none">

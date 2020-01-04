@@ -138,16 +138,16 @@ if (isset($_GET["item"])) {
                     if ($role == 'admin') {
                         echo " 
                         <br><br><div>    
-                        <a class=\"information-link\" href=\"?page=edit_ad&item=$idItem\">Upravit</a>
-                        <a class=\"information-link\" href=\"?page=delete_ad&item=$idItem\" onclick=\"return confirm('Opravdu chcete inzerát smazat?')\">Odstranit</a>
+                        <a class=\"information-link default\" href=\"?page=edit_ad&item=$idItem\">Upravit</a>
+                        <a class=\"information-link default\" href=\"?page=delete_ad&item=$idItem\" onclick=\"return confirm('Opravdu chcete inzerát smazat?')\">Odstranit</a>
                         </div>
                         ";
                     }
                 } else {
                     echo " 
                     <br><br><div>    
-                    <a class=\"information-link\" href=\"?page=edit_ad&item=$idItem\">Upravit</a>
-                    <a class=\"information-link\" href=\"?page=delete_ad&item=$idItem\" onclick=\"return confirm('Opravdu chcete inzerát smazat?')\">Odstranit</a>
+                    <a class=\"information-link default\" href=\"?page=edit_ad&item=$idItem\">Upravit</a>
+                    <a class=\"information-link default\" href=\"?page=delete_ad&item=$idItem\" onclick=\"return confirm('Opravdu chcete inzerát smazat?')\">Odstranit</a>
                     </div>
                     ";
                 }

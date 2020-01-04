@@ -18,7 +18,8 @@ $pictureList = getAllPictures();
             <br><br>
 
             <div id="div-region">
-                <div style="text-align: left"><a class="information-link" href="?page=add_region">Přidat region</a><br><br></div>
+                <div style="text-align: left"><a class="information-link default" href="?page=add_region">Přidat region</a><br><br></div>
+                <div style="overflow-x:auto;">
                 <table class='messages-table'>
                     <tr><th>Region</th><th>Editovat</th><th>Odstranit</th></tr>
                     <?php
@@ -36,10 +37,12 @@ $pictureList = getAllPictures();
                     }
                     ?>
                 </table>
+                </div>
             </div>
 
             <div id="div-city" style="display: none">
-                <div style="text-align: left"><a class="information-link" href="?page=add_city">Přidat město/obec</a><br><br></div>
+                <div style="text-align: left"><a class="information-link default" href="?page=add_city">Přidat město/obec</a><br><br></div>
+                <div style="overflow-x:auto;">
                 <table class='messages-table'>
                     <tr><th>Město/Obec</th><th>Region</th><th>Editovat</th><th>Odstranit</th></tr>
                     <?php
@@ -58,10 +61,12 @@ $pictureList = getAllPictures();
                     }
                     ?>
                 </table>
+                </div>
             </div>
 
             <div id="div-category" style="display: none">
-                <div style="text-align: left"><a class="information-link" href="?page=add_category">Přidat kategorii</a><br><br></div>
+                <div style="text-align: left"><a class="information-link default" href="?page=add_category">Přidat kategorii</a><br><br></div>
+                <div style="overflow-x:auto;">
                 <table class='messages-table'>
                     <tr><th>Kategorie</th><th>Editovat</th><th>Odstranit</th></tr>
                     <?php
@@ -79,10 +84,12 @@ $pictureList = getAllPictures();
                     }
                     ?>
                 </table>
+                </div>
             </div>
 
             <div id="div-room" style="display: none">
-                <div style="text-align: left"><a class="information-link" href="?page=add_room">Přidat typ místností</a><br><br></div>
+                <div style="text-align: left"><a class="information-link default" href="?page=add_room">Přidat typ místností</a><br><br></div>
+                <div style="overflow-x:auto;">
                 <table class='messages-table'>
                     <tr><th>Typ místností</th><th>Editovat</th><th>Odstranit</th></tr>
                     <?php
@@ -100,9 +107,11 @@ $pictureList = getAllPictures();
                     }
                     ?>
                 </table>
+                </div>
             </div>
 
             <div id="div-image" style="display: none">
+                <div style="overflow-x:auto;">
                 <table class='messages-table'>
                     <tr><th>Název obrázku</th><th>Cesta k souboru</th><th>Zobrazit</th><th>Editovat</th><th>Odstranit</th></tr>
                     <?php
@@ -122,6 +131,7 @@ $pictureList = getAllPictures();
                     }
                     ?>
                 </table>
+                </div>
             </div>
 
             </div>

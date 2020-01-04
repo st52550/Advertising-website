@@ -20,9 +20,9 @@ include_once './data/function.php';
 
 <body>
     <header>
-        <div class="full-width-wrapper">
-            <a href="./index.php"><img id="header-logo" src="./img/logo.png" width="128" height="128" alt="Logo"></a>
-            <div id="header-title"><b>Najdibydlení.cz</b></div>
+            <div id="header-title">
+                <a href="./index.php"><img id="header-logo" src="./img/logo.png" width="100" height="100" alt="Logo"></a>
+                <b>Najdibydlení.cz</b></div>
             <div id="login-buttons">
                 <?php
                 if (isset($_SESSION["user_id"])) {
@@ -35,10 +35,10 @@ include_once './data/function.php';
                 }
                 ?>
             </div>
-        </div>
     </header>
 
     <section id="nav-section">
+        <div class="full-width-wrapper">
         <nav>
             <?php
             if (isset($_SESSION["user_id"])) {
@@ -57,6 +57,7 @@ include_once './data/function.php';
             }
             ?>
         </nav>
+        </div>
     </section>
 
     <?php
@@ -125,7 +126,8 @@ include_once './data/function.php';
         }
     ?>
 
-    <main>
+    <section>
+        <div class="full-width-wrapper">
         <div id="sidenav">
             <h3>Vyhledávání inzerátů</h3><br>
 
@@ -139,7 +141,8 @@ include_once './data/function.php';
                 include "./page/items.php";
             ?>
         </div>
-    </main>
+        </div>
+    </section>
 
         <?php
     }

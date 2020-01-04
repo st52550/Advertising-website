@@ -62,7 +62,7 @@ $userItems = getItemsByUserId($actualUserId);
                             echo "<span>Prodej: <b>$price Kč</b></span>";
                         }
                         echo "
-                            &rarr; <a class=\"information-link\" href=\"?page=details&item=$itemId\">Zobrazit detaily</a>
+                            &rarr; <a class=\"information-link\" href=\"?page=details&item=$itemId\">Zobrazit&nbsp;detaily</a>
                             <a class=\"information-link\" href=\"?page=edit_ad&item=$itemId\">Upravit</a>
                             <a class=\"information-link\" href=\"?page=delete_ad&item=$itemId\" onclick=\"return confirm('Opravdu chcete inzerát smazat?')\">Odstranit</a>
                         </div>
